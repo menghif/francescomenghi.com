@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Project from '../components/Project.astro';
 import Card from '../components/Card.astro';
 ---
 
@@ -18,32 +19,34 @@ import Card from '../components/Card.astro';
           <h2>Featured Projects</h2>
 
           <!-- Project 1 -->
-          <section class="project-item">
-            <img src="telescope-thumbnail.webp" alt="Telescope app homepage">
-            <h3>Telescope (Contributor)</h3>
-            <p>Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend.</p>
-            <a class="btn" href="https://telescope.cdot.systems/">View App</a>
-            <a class="btn" href="https://github.com/Seneca-CDOT/telescope">Source Code</a>
-          </section>
-
+          <Project
+            title="Telescope (Contributor)"
+            body="Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend."
+            image="telescope-thumbnail.webp"
+            imageAlt="Telescope app homepage screenshot"
+            appLink="https://telescope.cdot.systems/"
+            codeLink="https://github.com/Seneca-CDOT/telescope"
+          />
+            
           <!-- Project 2 -->
-          <section class="project-item">
-            <img src="Restaurant-app.webp" alt="React restaurant app">
-            <h3>React App</h3>
-            <p>Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps.</p>
-            <a class="btn" href="https://restaurants-app-menghif.vercel.app">View App</a>
-            <a class="btn" href="https://github.com/menghif/restaurants-app">Source Code</a>
-          </section>
-
+          <Project
+            title="React App"
+            body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
+            image="Restaurant-app.webp"
+            imageAlt="React restaurant app screenshot"
+            appLink="https://restaurants-app-menghif.vercel.app"
+            codeLink="https://github.com/menghif/restaurants-app"
+          />
+            
           <!-- Project 3 -->
-          <section class="project-item">
-            <img src="Seneca-music-app.webp" alt="Seneca Music app">
-            <h3>Angular App</h3>
-            <p>Designed and implemented an Angular Material web app to display new music releases using the Spotify API.</p>
-            <p>Implemented signup and login using JWT token and MongoDB as database.</p>
-            <a class="btn" href="http://seneca-music-menghif.vercel.app/">View App</a>
-            <a class="btn" href="https://github.com/menghif/seneca-music">Source Code</a>
-          </section>
+          <Project
+            title="Angular Ap"
+            body="Designed and implemented an Angular Material web app to display new music releases using the Spotify API."
+            image="Seneca-music-app.webp"
+            imageAlt="Seneca Music app screenshot"
+            appLink="http://seneca-music-menghif.vercel.app"
+            codeLink="https://github.com/menghif/seneca-music"
+          />
         </div>
       </section>
 
@@ -79,10 +82,6 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 15px;
 	line-height: 1.5;
-}
-
-img {
-  width: 300px;
 }
 
 a {

@@ -1,18 +1,18 @@
 ---
 interface Props {
-	title: string;
-	body: string;
-	image: string;
+  title: string;
+  body: string;
+  image: string;
   imageAlt: string;
-	appLink: string;
-	codeLink: string;
+  appLink: string;
+  codeLink: string;
 }
 
 const { title, body, image, imageAlt, appLink, codeLink } = Astro.props;
 ---
 
 <section class="project-item">
-  <img src={image} alt={imageAlt} width="300px" height=100%>
+  <img src={image} alt={imageAlt} width="300px" height="100%" />
   <h3>{title}</h3>
   <p>{body}</p>
   <a class="btn" href={appLink}>View App</a>

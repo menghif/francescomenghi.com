@@ -1,213 +1,222 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Project from '../components/Project.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Project from "../components/Project.astro";
+import Card from "../components/Card.astro";
 ---
 
 <Layout title="Francesco Menghi">
-    <main>
-      <header>
-        <div class="content-wrap">
-          <h1>Francesco Menghi</h1>
-          <h2 class="subtitle">Software Developer</h2>
-          <p>Recent computer programming and analysis graduate with experience in Open Source development. Eager to learn, grow and contribute in the software development space.</p>
-        </div>
-      </header>
+  <main>
+    <header>
+      <div class="content-wrap">
+        <h1>Francesco Menghi</h1>
+        <h2 class="subtitle">Software Developer</h2>
+        <p>
+          Recent computer programming and analysis graduate with experience in
+          Open Source development. Eager to learn, grow and contribute in the
+          software development space.
+        </p>
+      </div>
+    </header>
 
-      <section class="projects">
-        <div class="content-wrap divider">
-          <h2>Featured Projects</h2>
+    <section class="projects">
+      <div class="content-wrap divider">
+        <h2>Featured Projects</h2>
 
-          <!-- Project 1 -->
-          <Project
-            title="Telescope (Contributor)"
-            body="Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend."
-            image="telescope-thumbnail.webp"
-            imageAlt="Telescope app homepage screenshot"
-            appLink="https://telescope.cdot.systems/"
-            codeLink="https://github.com/Seneca-CDOT/telescope"
-          />
-            
-          <!-- Project 2 -->
-          <Project
-            title="React App"
-            body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
-            image="Restaurant-app.webp"
-            imageAlt="React restaurant app screenshot"
-            appLink="https://restaurants-app-menghif.vercel.app"
-            codeLink="https://github.com/menghif/restaurants-app"
-          />
-            
-          <!-- Project 3 -->
-          <Project
-            title="Angular Ap"
-            body="Designed and implemented an Angular Material web app to display new music releases using the Spotify API."
-            image="Seneca-music-app.webp"
-            imageAlt="Seneca Music app screenshot"
-            appLink="http://seneca-music-menghif.vercel.app"
-            codeLink="https://github.com/menghif/seneca-music"
-          />
-        </div>
-      </section>
+        <!-- Project 1 -->
+        <Project
+          title="Telescope (Contributor)"
+          body="Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend."
+          image="telescope-thumbnail.webp"
+          imageAlt="Telescope app homepage screenshot"
+          appLink="https://telescope.cdot.systems/"
+          codeLink="https://github.com/Seneca-CDOT/telescope"
+        />
 
-      <footer>
-        <div class="content-wrap">
-          <h2>Let's Keep in Touch!</h2>
-          <ul class="contact-list">
-            <li><a href="mailto:francescomenghi@gmail.com">Email</a></li>
-            <li><a href="http://dev.to/menghif" target="_blank">Blog</a></li>
-            <li><a rel="me" href="https://social.lol/@francesco" target="_blank">Mastodon</a></li>
-            <li><a href="http://linkedin.com/in/menghif" target="_blank">LinkedIn</a></li>
-          </ul>
-        </div>
-      </footer>
-    </main>
+        <!-- Project 2 -->
+        <Project
+          title="React App"
+          body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
+          image="Restaurant-app.webp"
+          imageAlt="React restaurant app screenshot"
+          appLink="https://restaurants-app-menghif.vercel.app"
+          codeLink="https://github.com/menghif/restaurants-app"
+        />
+
+        <!-- Project 3 -->
+        <Project
+          title="Angular Ap"
+          body="Designed and implemented an Angular Material web app to display new music releases using the Spotify API."
+          image="Seneca-music-app.webp"
+          imageAlt="Seneca Music app screenshot"
+          appLink="http://seneca-music-menghif.vercel.app"
+          codeLink="https://github.com/menghif/seneca-music"
+        />
+      </div>
+    </section>
+
+    <footer>
+      <div class="content-wrap">
+        <h2>Let's Keep in Touch!</h2>
+        <ul class="contact-list">
+          <li><a href="mailto:francescomenghi@gmail.com">Email</a></li>
+          <li><a href="http://dev.to/menghif" target="_blank">Blog</a></li>
+          <li>
+            <a rel="me" href="https://social.lol/@francesco" target="_blank"
+              >Mastodon</a
+            >
+          </li>
+          <li>
+            <a href="http://linkedin.com/in/menghif" target="_blank">LinkedIn</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </main>
 </Layout>
 
 <style is:global>
-
-	/* 1. Create global variables for text and background color */
-:root {
-  --color-text: #343434;
-  --color-background: #F7FFF7;
-	--color-buttons: #023047;
-	--color-footer: rgba(52, 52, 52, 1);
-}
-
-body {
-	color: var(--color-text);
-	background-color: var(--color-background);
-	margin: 0;
-	padding: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 15px;
-	line-height: 1.5;
-}
-
-a {
-  color: #8ECAE6;
-}
-a:hover {
-  text-decoration: none;
-}
-h1 {
-  font-size: 60px;
-  line-height: 1;
-}
-h2 {
-  font-size: 30px;
-}
-h1, h2 {
-  font-weight: 400;
-  margin: 0;
-}
-.content-wrap {
-  max-width: 800px;
-  width: 85%;
-  margin: 0 auto;
-  padding: 60px 0;
-}
-h3 {
-  margin-bottom: 0;
-}
-.subtitle {
-  font-style: italic;
-}
-.divider > section {
-  border-bottom: 1px dashed var(--color-buttons);
-  padding: 25px 0;
-}
-.divider > section:last-of-type {
-  border-bottom: none;
-}
-
-header {
-  background: #023047;
-  color: #F7FFF7;
-}
-
-.logos {
-  width: 1.5rem;
-}
-
-/* Projects --------------------------------------*/
-.projects {
-  background: var(--color-background);
-}
-.projects a {
-  color: var(--color-buttons);
-}
-.projects .btn {
-  color: #F7FFF7;
-  background: var(--color-buttons);
-  text-decoration: none;
-  padding: 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-.projects .btn:hover {
-  background: rgba(2, 47, 70, 0.8);
-}
-.project-item {
-  overflow: hidden;
-}
-.project-item h3 {
-  margin-top: 0;
-}
-
-/* Contact Info ---------------------------------*/
-
-footer {
-  background: var(--color-footer);
-  color: #F7FFF7;
-}
-.contact-list {
-  list-style-type: none;
-  padding: 0;
-}
-.contact-list a {
-  padding: 20px;
-  display: inline-block;
-}
-
-
-/* Responsive ----------------------------------*/
-@media screen and (min-width:750px){
-  header, footer {
-    text-align: center;
+  /* 1. Create global variables for text and background color */
+  :root {
+    --color-text: #343434;
+    --color-background: #f7fff7;
+    --color-buttons: #023047;
+    --color-footer: rgba(52, 52, 52, 1);
   }
-  .project-item img {
-    float: left;
-    margin-right: 20px;
-  }
-  .contact-list {
-    display: flex;
-    justify-content: center;
-  }
-}
 
-@media screen and (max-width:749px){
+  body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  a {
+    color: #8ecae6;
+  }
+  a:hover {
+    text-decoration: none;
+  }
   h1 {
     font-size: 60px;
-    line-height: 0.9;
-    margin-bottom: 20px;
-  }
-  h2 {
     line-height: 1;
   }
+  h2 {
+    font-size: 30px;
+  }
+  h1,
+  h2 {
+    font-weight: 400;
+    margin: 0;
+  }
+  .content-wrap {
+    max-width: 800px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 60px 0;
+  }
+  h3 {
+    margin-bottom: 0;
+  }
+  .subtitle {
+    font-style: italic;
+  }
+  .divider > section {
+    border-bottom: 1px dashed var(--color-buttons);
+    padding: 25px 0;
+  }
+  .divider > section:last-of-type {
+    border-bottom: none;
+  }
+
+  header {
+    background: #023047;
+    color: #f7fff7;
+  }
+
+  .logos {
+    width: 1.5rem;
+  }
+
+  /* Projects --------------------------------------*/
+  .projects {
+    background: var(--color-background);
+  }
+  .projects a {
+    color: var(--color-buttons);
+  }
+  .projects .btn {
+    color: #f7fff7;
+    background: var(--color-buttons);
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .projects .btn:hover {
+    background: rgba(2, 47, 70, 0.8);
+  }
+  .project-item {
+    overflow: hidden;
+  }
+  .project-item h3 {
+    margin-top: 0;
+  }
+
+  /* Contact Info ---------------------------------*/
+
+  footer {
+    background: var(--color-footer);
+    color: #f7fff7;
+  }
+  .contact-list {
+    list-style-type: none;
+    padding: 0;
+  }
   .contact-list a {
-    padding: 15px;
+    padding: 20px;
+    display: inline-block;
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  /* Re-assign previous variables */
-  :root {
-    --color-text: #F7FFF7; /* black => white */
-    --color-background: #343434; /* white => black */
-		--color-footer: rgba(30, 30, 30, 1);
-
+  /* Responsive ----------------------------------*/
+  @media screen and (min-width: 750px) {
+    header,
+    footer {
+      text-align: center;
+    }
+    .project-item img {
+      float: left;
+      margin-right: 20px;
+    }
+    .contact-list {
+      display: flex;
+      justify-content: center;
+    }
   }
-}
 
+  @media screen and (max-width: 749px) {
+    h1 {
+      font-size: 60px;
+      line-height: 0.9;
+      margin-bottom: 20px;
+    }
+    h2 {
+      line-height: 1;
+    }
+    .contact-list a {
+      padding: 15px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    /* Re-assign previous variables */
+    :root {
+      --color-text: #f7fff7; /* black => white */
+      --color-background: #343434; /* white => black */
+      --color-footer: rgba(30, 30, 30, 1);
+    }
+  }
 </style>

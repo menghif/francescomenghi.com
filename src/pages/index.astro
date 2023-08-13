@@ -1,13 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Project from "../components/Project.astro";
-import Card from "../components/Card.astro";
 ---
 
 <Layout title="Francesco Menghi">
   <main>
     <header>
       <div class="content-wrap">
+        <img
+          id="profile-picture"
+          src="https://avatars.githubusercontent.com/u/53121061?v=4"
+          alt="Profile picture"
+          height="200rem"
+          width="200rem"
+        />
         <h1>Francesco Menghi</h1>
         <h2 class="subtitle">Software Developer</h2>
         <p>
@@ -27,6 +33,7 @@ import Card from "../components/Card.astro";
           title="Telescope (Contributor)"
           body="Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend."
           image="telescope-thumbnail.webp"
+          imagePos="left"
           imageAlt="Telescope app homepage screenshot"
           appLink="https://telescope.cdot.systems/"
           codeLink="https://github.com/Seneca-CDOT/telescope"
@@ -37,6 +44,7 @@ import Card from "../components/Card.astro";
           title="React App"
           body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
           image="Restaurant-app.webp"
+          imagePos="right"
           imageAlt="React restaurant app screenshot"
           appLink="https://restaurants-app-menghif.vercel.app"
           codeLink="https://github.com/menghif/restaurants-app"
@@ -44,9 +52,10 @@ import Card from "../components/Card.astro";
 
         <!-- Project 3 -->
         <Project
-          title="Angular Ap"
+          title="Angular App"
           body="Designed and implemented an Angular Material web app to display new music releases using the Spotify API."
           image="Seneca-music-app.webp"
+          imagePos="left"
           imageAlt="Seneca Music app screenshot"
           appLink="http://seneca-music-menghif.vercel.app"
           codeLink="https://github.com/menghif/seneca-music"
@@ -58,16 +67,40 @@ import Card from "../components/Card.astro";
       <div class="content-wrap">
         <h2>Let's Keep in Touch!</h2>
         <ul class="contact-list">
-          <li><a href="mailto:francescomenghi@gmail.com">Email</a></li>
-          <li><a href="http://dev.to/menghif" target="_blank">Blog</a></li>
           <li>
-            <a rel="me" href="https://social.lol/@francesco" target="_blank"
-              >Mastodon</a
-            >
+            <img
+              class="icon"
+              width="25rem"
+              height="25rem"
+              src="envelope-regular.svg"
+            />
+            <a href="mailto:francescomenghi@gmail.com">Email</a>
           </li>
           <li>
-            <a href="http://linkedin.com/in/menghif" target="_blank">LinkedIn</a
-            >
+            <img
+              class="icon"
+              width="25rem"
+              height="25rem"
+              src="rss-solid.svg"
+            />
+            <a href="http://dev.to/menghif" target="_blank">Blog</a>
+          </li>
+          <li>
+            <img class="icon" width="25rem" height="25rem" src="mastodon.svg" />
+            <a rel="me" href="https://social.lol/@francesco" target="_blank"
+              >Mastodon
+            </a>
+          </li>
+          <li>
+            <img
+              class="icon"
+              width="25rem"
+              height="25rem"
+              src="linkedin-3.svg"
+            />
+            <a href="http://linkedin.com/in/menghif" target="_blank"
+              >LinkedIn
+            </a>
           </li>
         </ul>
       </div>
@@ -76,14 +109,6 @@ import Card from "../components/Card.astro";
 </Layout>
 
 <style is:global>
-  /* 1. Create global variables for text and background color */
-  :root {
-    --color-text: #343434;
-    --color-background: #f7fff7;
-    --color-buttons: #023047;
-    --color-footer: rgba(52, 52, 52, 1);
-  }
-
   body {
     color: var(--color-text);
     background-color: var(--color-background);
@@ -125,11 +150,17 @@ import Card from "../components/Card.astro";
     font-style: italic;
   }
   .divider > section {
-    border-bottom: 1px dashed var(--color-buttons);
+    border-bottom: 1px dashed var(--color-text);
     padding: 25px 0;
   }
   .divider > section:last-of-type {
     border-bottom: none;
+  }
+
+  #profile-picture {
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    filter: drop-shadow(0.2rem 0.2rem 0.2rem #2e2e2e);
   }
 
   header {
@@ -145,20 +176,11 @@ import Card from "../components/Card.astro";
   .projects {
     background: var(--color-background);
   }
-  .projects a {
-    color: var(--color-buttons);
+
+  .project-info {
+    margin: 1rem;
   }
-  .projects .btn {
-    color: #f7fff7;
-    background: var(--color-buttons);
-    text-decoration: none;
-    padding: 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  .projects .btn:hover {
-    background: rgba(2, 47, 70, 0.8);
-  }
+
   .project-item {
     overflow: hidden;
   }
@@ -167,7 +189,6 @@ import Card from "../components/Card.astro";
   }
 
   /* Contact Info ---------------------------------*/
-
   footer {
     background: var(--color-footer);
     color: #f7fff7;
@@ -176,9 +197,21 @@ import Card from "../components/Card.astro";
     list-style-type: none;
     padding: 0;
   }
+  .contact-list li {
+    padding: 1rem;
+  }
+  .contact-list img {
+    vertical-align: text-bottom;
+  }
+
   .contact-list a {
-    padding: 20px;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
     display: inline-block;
+    text-align: center;
+  }
+
+  .icon {
   }
 
   /* Responsive ----------------------------------*/
@@ -187,10 +220,16 @@ import Card from "../components/Card.astro";
     footer {
       text-align: center;
     }
-    .project-item img {
+    .left-image {
       float: left;
       margin-right: 20px;
     }
+
+    .right-image {
+      float: right;
+      margin-left: 20px;
+    }
+
     .contact-list {
       display: flex;
       justify-content: center;
@@ -206,17 +245,8 @@ import Card from "../components/Card.astro";
     h2 {
       line-height: 1;
     }
-    .contact-list a {
-      padding: 15px;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    /* Re-assign previous variables */
-    :root {
-      --color-text: #f7fff7; /* black => white */
-      --color-background: #343434; /* white => black */
-      --color-footer: rgba(30, 30, 30, 1);
+    .contact-list li {
+      padding: 0.7rem;
     }
   }
 </style>

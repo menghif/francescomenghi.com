@@ -6,7 +6,7 @@ import Project from "../components/Project.astro";
 <Layout title="Francesco Menghi">
   <main>
     <header>
-      <div class="content-wrap">
+      <div class="header content-wrap">
         <img
           id="profile-picture"
           src="https://avatars.githubusercontent.com/u/53121061?v=4"
@@ -70,37 +70,52 @@ import Project from "../components/Project.astro";
           <li>
             <img
               class="icon"
+              alt="Email icon"
               width="25rem"
               height="25rem"
-              src="envelope-regular.svg"
+              src="email.svg"
             />
             <a href="mailto:francescomenghi@gmail.com">Email</a>
           </li>
           <li>
             <img
               class="icon"
+              alt="Github icon"
               width="25rem"
               height="25rem"
-              src="rss-solid.svg"
+              src="github.svg"
             />
-            <a href="http://dev.to/menghif" target="_blank">Blog</a>
-          </li>
-          <li>
-            <img class="icon" width="25rem" height="25rem" src="mastodon.svg" />
-            <a rel="me" href="https://social.lol/@francesco" target="_blank"
-              >Mastodon
-            </a>
+            <a href="http://github.com/menghif">Github</a>
           </li>
           <li>
             <img
               class="icon"
+              alt="Mastodon icon"
               width="25rem"
               height="25rem"
-              src="linkedin-3.svg"
+              src="mastodon.svg"
             />
-            <a href="http://linkedin.com/in/menghif" target="_blank"
-              >LinkedIn
-            </a>
+            <a rel="me" href="https://social.lol/@francesco">Mastodon</a>
+          </li>
+          <li>
+            <img
+              class="icon"
+              alt="Blog icon"
+              width="25rem"
+              height="25rem"
+              src="blog.svg"
+            />
+            <a href="http://dev.to/menghif">Blog</a>
+          </li>
+          <li>
+            <img
+              class="icon"
+              alt="LinkedIn icon"
+              width="25rem"
+              height="25rem"
+              src="linkedin.svg"
+            />
+            <a href="http://linkedin.com/in/menghif">LinkedIn</a>
           </li>
         </ul>
       </div>
@@ -158,13 +173,31 @@ import Project from "../components/Project.astro";
   }
 
   #profile-picture {
+    animation: 0.5s ease-out 0s 1 slideInTopImage;
+
     margin-bottom: 1rem;
     border-radius: 50%;
     filter: drop-shadow(0.2rem 0.2rem 0.2rem #2e2e2e);
   }
 
   header {
-    background: #023047;
+    animation: 0.5s ease-out 0s 1 slideInTop;
+    background-image: linear-gradient(
+      0deg,
+      hsl(200deg 95% 14%) 0%,
+      hsl(200deg 100% 13%) 7%,
+      hsl(201deg 100% 13%) 13%,
+      hsl(202deg 100% 12%) 19%,
+      hsl(203deg 100% 11%) 25%,
+      hsl(204deg 100% 11%) 30%,
+      hsl(205deg 100% 10%) 36%,
+      hsl(207deg 100% 9%) 42%,
+      hsl(208deg 100% 9%) 48%,
+      hsl(211deg 100% 8%) 55%,
+      hsl(214deg 100% 7%) 63%,
+      hsl(220deg 100% 7%) 73%,
+      hsl(0deg 0% 0%) 93%
+    );
     color: #f7fff7;
   }
 
@@ -186,6 +219,24 @@ import Project from "../components/Project.astro";
   }
   .project-item h3 {
     margin-top: 0;
+  }
+
+  @keyframes slideInTop {
+    0% {
+      transform: translateY(-15%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInTopImage {
+    0% {
+      transform: translateY(-30%);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 
   /* Contact Info ---------------------------------*/

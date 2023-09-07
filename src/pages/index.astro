@@ -1,22 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Project from "../components/Project.astro";
+import { Image, getImage } from "astro:assets";
+
+import profilePic from "../assets/profile-pic.jpeg";
+import telescopeScreenshot from "../assets/telescope-thumbnail.png";
+import nycRestaurantsScreenshot from "../assets/nyc-restaurant-app.png";
+import groceryStoreScreenshot from "../assets/grocery-store-frontend.png";
+
+const profilePic1x = await getImage({
+  src: profilePic,
+  width: 200,
+});
+const profilePic2x = await getImage({
+  src: profilePic,
+  width: 400,
+});
 ---
 
 <Layout title="Francesco Menghi">
   <main>
     <header>
       <div class="header content-wrap">
-        <img
-          id="profile-picture"
-          src="/profile-pic.webp"
-          alt="Profile picture"
-          height="200rem"
-          width="200rem"
-        />
+        <picture>
+          <source srcset={profilePic2x.src} media="(min-resolution: 2dppx)" />
+          <img
+            id="profile-picture"
+            src={profilePic1x.src}
+            {...profilePic1x.attributes}
+            alt="Profile picture"
+          />
+        </picture>
         <h1>Francesco Menghi</h1>
         <h2 class="subtitle">Software Developer</h2>
-        <p>
+        <p class="description">
           Recent computer programming and analysis graduate with experience in
           Open Source development. Eager to learn, grow and contribute in the
           software development space.
@@ -32,7 +49,7 @@ import Project from "../components/Project.astro";
         <Project
           title="Telescope (Contributor)"
           body="Worked with a group of students on Telescope: a blogging aggregator web application built using a React frontend and many micro-services as backend."
-          image="telescope-thumbnail.webp"
+          image={telescopeScreenshot}
           imagePos="left"
           imageAlt="Telescope app homepage screenshot"
           appLink="https://telescope.cdot.systems/"
@@ -43,7 +60,7 @@ import Project from "../components/Project.astro";
         <Project
           title="React App"
           body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
-          image="nyc-restaurant-app.webp"
+          image={nycRestaurantsScreenshot}
           imagePos="right"
           imageAlt="React restaurant app screenshot"
           appLink="https://restaurants-app-menghif.vercel.app"
@@ -54,7 +71,7 @@ import Project from "../components/Project.astro";
         <Project
           title="Grocery Store Frontend"
           body="Designed and implemented the frontend for a grocery store using HTML, CSS and Javascript."
-          image="grocery-store-frontend.webp"
+          image={groceryStoreScreenshot}
           imagePos="left"
           imageAlt="Grocery store frontend screenshot"
           appLink="https://menghif.github.io/grocery-store-frontend/"
@@ -162,6 +179,7 @@ import Project from "../components/Project.astro";
     margin-bottom: 0;
   }
   .subtitle {
+    opacity: 80%;
     font-style: italic;
   }
   .divider > section {
@@ -177,7 +195,7 @@ import Project from "../components/Project.astro";
 
     margin-bottom: 1rem;
     border-radius: 50%;
-    filter: drop-shadow(0.2rem 0.2rem 0.2rem #2e2e2e);
+    filter: drop-shadow(0.1rem 0.1rem 0.1rem #2e2e2e);
   }
 
   header {
@@ -199,6 +217,10 @@ import Project from "../components/Project.astro";
       hsl(0deg 0% 0%) 93%
     );
     color: #f7fff7;
+  }
+
+  .description {
+    opacity: 80%;
   }
 
   .logos {

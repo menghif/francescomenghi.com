@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
   body: string;
-  image: string;
+  image: ImageMetadata;
   imagePos: string;
   imageAlt: string;
   appLink: string;
@@ -15,25 +17,14 @@ const { title, body, image, imagePos, imageAlt, appLink, codeLink } =
 
 <section class="project-item">
   {
-    imagePos === "left" ? (
-      <>
-        <img
+      <Image
           src={image}
-          class="left-image"
+          class={imagePos === "left" ? "left-image" : "right-image"}
           alt={imageAlt}
-          width="300px"
-          height="100%"
+          quality="100"
+          width="300"
+          height="250"
         />
-      </>
-    ) : (
-      <img
-        src={image}
-        class="right-image"
-        alt={imageAlt}
-        width="300px"
-        height="100%"
-      />
-    )
   }
   <div class="project-info">
     <h3>{title}</h3>

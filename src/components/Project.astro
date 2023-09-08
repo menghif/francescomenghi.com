@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 
 interface Props {
   title: string;
@@ -13,19 +13,21 @@ interface Props {
 
 const { title, body, image, imagePos, imageAlt, appLink, codeLink } =
   Astro.props;
+
+  const screenshot1x = await getImage({src: image, width: 300})
+  const screenshot2x = await getImage({src: image, width: 600})
 ---
 
 <section class="project-item">
-  {
-      <Image
-          src={image}
-          class={imagePos === "left" ? "left-image" : "right-image"}
-          alt={imageAlt}
-          quality="100"
-          width="300"
-          height="250"
-        />
-  }
+  <picture>
+    <source srcset={screenshot2x.src} media="(min-resolution: 2dppx)" />
+    <img
+      src={screenshot1x.src}
+      {...screenshot1x.attributes}
+      class={imagePos === "left" ? "left-image" : "right-image"}
+      alt={imageAlt}
+    />
+  </picture>
   <div class="project-info">
     <h3>{title}</h3>
     <p>{body}</p>

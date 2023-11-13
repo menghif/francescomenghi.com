@@ -3,6 +3,7 @@ import { getImage } from "astro:assets";
 
 interface Props {
   title: string;
+  type: string;
   body: string;
   image: ImageMetadata;
   imagePos: string;
@@ -11,7 +12,7 @@ interface Props {
   codeLink: string;
 }
 
-const { title, body, image, imagePos, imageAlt, appLink, codeLink } =
+const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
   Astro.props;
 
   const screenshot1x = await getImage({src: image, width: 300})
@@ -31,11 +32,12 @@ const { title, body, image, imagePos, imageAlt, appLink, codeLink } =
   <div class="project-info">
     <h3>{title}</h3>
     <p>{body}</p>
+    {appLink != "" ?
     <a class="link" href={appLink}>
       <span></span>
-       View App
+       View {type}
       <span></span>
-    </a>
+    </a> : <span></span>}
     <a class="link" href={codeLink}>
       <span></span>
        Source Code

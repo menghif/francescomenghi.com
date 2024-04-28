@@ -1,0 +1,31 @@
+---
+const { url, title, pubDate } = Astro.props;
+---
+
+<li>
+  <p>
+    <a href={url} class="post">{title}</a>
+    <span class="date"> {pubDate.toString().slice(4, 15)}</span>
+  </p>
+</li>
+
+<style>
+  p {
+    margin: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .post {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .post:hover {
+    text-decoration: underline;
+  }
+
+  .date {
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+</style>

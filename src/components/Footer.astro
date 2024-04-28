@@ -1,0 +1,39 @@
+---
+import Social from "./Social.astro";
+import EmailIcon from "./icons/EmailIcon.astro";
+import GithubIcon from "./icons/GithubIcon.astro";
+import MastodonIcon from "./icons/MastodonIcon.astro";
+import LinkedinIcon from "./icons/LinkedinIcon.astro";
+---
+
+<footer>
+  <div class="content-wrap">
+    <h2>Let's Keep in Touch!</h2>
+    <ul class="contact-list">
+      <Social platform="Email" link="mailto:francescomenghi@gmail.com">
+        <EmailIcon />
+      </Social>
+      <Social platform="Github" link="https://github.com/menghif">
+        <GithubIcon />
+      </Social>
+      <Social platform="Mastodon" link="https://social.lol/@francesco">
+        <MastodonIcon />
+      </Social>
+      <Social platform="LinkedIn" link="https://linkedin.com/in/menghif">
+        <LinkedinIcon />
+      </Social>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .content-wrap {
+    margin: 0 2rem;
+    padding: 3.2rem 0;
+  }
+
+  .contact-list {
+    list-style-type: none;
+    padding: 0;
+  }
+</style>

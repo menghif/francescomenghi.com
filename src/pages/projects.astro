@@ -1,0 +1,106 @@
+---
+import { fade } from "astro:transitions";
+import Project from "../components/Project.astro";
+import telescopeScreenshot from "../assets/telescope-thumbnail.png";
+import nycRestaurantsScreenshot from "../assets/nyc-restaurant-app.png";
+import groceryStoreScreenshot from "../assets/grocery-store-frontend.png";
+import bikeShareMap from "../assets/bike-share-app.png";
+import staticDodo from "../assets/static-dodo-npmjs.png";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Projects";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div transition:animate={fade({ duration: "300ms" })}>
+    <h1>{pageTitle}</h1>
+
+    <div class="content-wrap divider">
+      <Project
+        title="Telescope (Contributor)"
+        type="App"
+        body="Worked with a group of students on a blogging aggregator web app, built using a React frontend and micro-services as backend."
+        image={telescopeScreenshot}
+        imageAlt="Telescope app homepage screenshot"
+        appLink=""
+        codeLink="https://github.com/Seneca-CDOT/telescope"
+      />
+
+      <Project
+        title="React App"
+        type="App"
+        body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
+        image={nycRestaurantsScreenshot}
+        imageAlt="React restaurant app screenshot"
+        appLink="https://restaurants-app.menghi.me"
+        codeLink="https://github.com/menghif/restaurants-app"
+      />
+
+      <Project
+        title="Bike Share Map"
+        type="App"
+        body="Web app to access live Bike Share Toronto data, with capability to access user location to display nearby bikes."
+        image={bikeShareMap}
+        imageAlt="Bike Share Map screenshot"
+        appLink="https://bikeshare.menghi.me"
+        codeLink="https://github.com/menghif/bike-toronto"
+      />
+
+      <Project
+        title="Static Site Generator"
+        type="Package"
+        body="Command Line tool built with NodeJS that converts text and/or markdown files into HTML pages."
+        image={staticDodo}
+        imageAlt="Static Dodo Npmjs webpage screenshot"
+        appLink="https://www.npmjs.com/package/static-dodo"
+        codeLink="https://github.com/menghif/static-dodo"
+      />
+
+      <Project
+        title="Grocery Store Frontend"
+        type="App"
+        body="Designed and implemented the frontend for a grocery store using HTML, CSS and Javascript."
+        image={groceryStoreScreenshot}
+        imageAlt="Grocery store frontend screenshot"
+        appLink="https://grocery-store.menghi.me"
+        codeLink="https://github.com/menghif/grocery-store-frontend"
+      />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .projects {
+    background: var(--color-background);
+  }
+
+  .project-info {
+    margin: 1rem;
+  }
+
+  .project-item {
+    overflow: hidden;
+  }
+  .project-item h3 {
+    margin-top: 0;
+  }
+
+  .divider > section {
+    border-bottom: 1px dashed var(--color-text);
+    padding: 25px 0;
+  }
+  .divider > section:last-of-type {
+    border-bottom: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .left-image {
+      float: left;
+      margin-right: 20px;
+    }
+
+    .right-image {
+      float: right;
+      margin-left: 20px;
+    }
+  }
+</style>

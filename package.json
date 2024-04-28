@@ -11,7 +11,9 @@
     "lint": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\""
   },
   "dependencies": {
-    "astro": "^4.5.9"
+    "@astrojs/rss": "^4.0.5",
+    "astro": "^4.7.1",
+    "astro-expressive-code": "^0.35.2"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

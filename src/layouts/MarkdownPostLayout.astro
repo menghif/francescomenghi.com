@@ -1,0 +1,61 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { Image } from "astro:assets";
+import { fade } from "astro:transitions";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <div transition:animate={fade({ duration: "300ms" })}>
+    <h1>
+      {frontmatter.title}
+    </h1>
+    <p>{frontmatter.pubDate.toString().slice(0, 15)}</p>
+    <p>
+      <em>{frontmatter.description}</em>
+    </p>
+    <p>Written by: <a href="/about/">{frontmatter.author}</a></p>
+
+    <Image
+      class="image"
+      width={700}
+      height={300}
+      src={frontmatter.image.url}
+      alt={frontmatter.image.alt}
+      loading="eager"
+    />
+    <div class="tags">
+      {
+        frontmatter.tags.map((tag) => (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .image {
+    border-radius: 0.6rem;
+  }
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    background-color: #f8fcfd;
+  }
+</style>

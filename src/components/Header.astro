@@ -1,0 +1,64 @@
+---
+import Navigation from "./Navigation.astro";
+import Hamburger from "./icons/Hamburger.astro";
+import ThemeIcon from "./icons/ThemeIcon.astro";
+const skillColor = "navy";
+const color = "#89c2d9";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+
+<header>
+  <nav>
+    <div class="icons">
+      <ThemeIcon />
+      <Hamburger />
+    </div>
+    <div class="menu">
+      <Navigation />
+    </div>
+  </nav>
+</header>
+
+<style define:vars={{ skillColor, color, fontWeight, textCase }}>
+  header {
+    margin-bottom: 2rem;
+  }
+
+  .hamburger {
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .menu {
+    padding: 0 0.8rem;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* h1 {
+    font-size: 4rem;
+  } */
+
+  .skill {
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+
+  @media screen and (min-width: 600px) {
+    header {
+      border-bottom: 2px solid var(--color);
+      padding-bottom: 0.2rem;
+    }
+    nav {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>

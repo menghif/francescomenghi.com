@@ -1,0 +1,65 @@
+---
+const { platform, link } = Astro.props;
+---
+
+<li>
+  <!-- verfied badge for Mastodon rel="me" -->
+  {
+    platform === "Mastodon" ? (
+      <a rel="me" class="social-link" href={link}>
+        <slot class="icon" />
+        <span class="text hover-underline">{platform}</span>
+      </a>
+    ) : (
+      <a href={link}>
+        <slot class="icon" />
+        <span class="text hover-underline">{platform}</span>
+      </a>
+    )
+  }
+</li>
+
+<style>
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    color: #013a63;
+    &:focus {
+      border-radius: 0.9rem;
+    }
+    text-decoration: none;
+  }
+
+  html.dark a {
+    color: #a9d6e5;
+  }
+
+  .text {
+    margin: 0.6rem 1rem;
+  }
+
+  @media screen and (max-width: 699px) {
+    a {
+      width: 11rem;
+    }
+  }
+
+  :global(.icon-fill) {
+    transition: fill 500ms;
+    fill: transparent;
+  }
+
+  :global(.dark) :global(.icon-outline) {
+    fill: white;
+  }
+  html.dark a:hover :global(.icon-fill) {
+    fill: hsl(216, 6%, 55%);
+    transition: fill 300ms;
+  }
+
+  a:hover :global(.icon-fill) {
+    fill: hsl(216, 6%, 80%);
+    transition: fill 300ms;
+  }
+</style>

@@ -1,0 +1,64 @@
+<button class="hamburger" aria-label="Menu toggle">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</button>
+
+<style>
+  .hamburger {
+    border: 0;
+    background: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    &:hover,
+    &:focus {
+      border-radius: 0.9rem;
+    }
+  }
+
+  html.dark .hamburger .bar {
+    background: #fff;
+  }
+
+  .hamburger .bar {
+    margin: 0.4rem;
+    width: 1.8rem;
+    height: 0.2rem;
+    background: #000;
+    border-radius: 0.9rem;
+    opacity: 1;
+    transition:
+      margin 350ms,
+      transform 350ms,
+      opacity 200ms;
+  }
+
+  .close .bar:first-child {
+    transform: translateY(0.6rem) rotate(45deg);
+  }
+
+  .close .bar:nth-child(2) {
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+
+  .close .bar:last-child {
+    transform: translateY(-0.6rem) rotate(-45deg);
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const hamburger = document.querySelector(".hamburger");
+
+    hamburger?.addEventListener("click", function (e) {
+      e.preventDefault();
+      hamburger.classList.toggle("close");
+    });
+
+    hamburger?.addEventListener("enter", function (e) {
+      e.preventDefault();
+      hamburger.classList.toggle("close");
+    });
+  });
+</script>

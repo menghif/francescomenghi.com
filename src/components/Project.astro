@@ -1,43 +1,39 @@
 ---
-import { getImage } from "astro:assets";
+import { Image } from "astro:assets";
 
 interface Props {
   title: string;
   type: string;
   body: string;
   image: ImageMetadata;
-  imagePos: string;
   imageAlt: string;
   appLink: string;
   codeLink: string;
 }
 
-const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
-  Astro.props;
-
-  const screenshot1x = await getImage({src: image, width: 300})
-  const screenshot2x = await getImage({src: image, width: 600})
+const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
 ---
 
 <section class="project-item">
-  <picture>
-    <source srcset={screenshot2x.src} media="(min-resolution: 2dppx)" />
-    <img
-      src={screenshot1x.src}
-      {...screenshot1x.attributes}
-      class={imagePos === "left" ? "left-image" : "right-image"}
-      alt={imageAlt}
-    />
-  </picture>
+  <div class="screenshot">
+    <a href={appLink ? appLink : codeLink}
+      ><Image src={image} alt={imageAlt} loading="eager" /></a
+    >
+  </div>
   <div class="project-info">
-    <h3>{title}</h3>
+    <h2>{title}</h2>
     <p>{body}</p>
-    {appLink != "" ?
-    <a class="link" href={appLink}>
-      <span></span>
-       View {type}
-      <span></span>
-    </a> : <span></span>}
+    {
+      appLink != "" ? (
+        <a class="link" href={appLink}>
+          <span />
+          View {type}
+          <span />
+        </a>
+      ) : (
+        <span />
+      )
+    }
     <a class="link" href={codeLink}>
       <span></span>
        Source Code
@@ -47,26 +43,73 @@ const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
 </section>
 
 <style>
+  .project-item {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 1.2vw;
+    box-shadow: 0 0 1.5rem 0.1rem hsla(200, 94%, 14%, 0.1);
+  }
+
+  .screenshot {
+    flex: 2;
+
+    transition: 300ms ease all;
+    &:hover {
+      cursor: pointer;
+      transform: perspective(600px) rotateY(6deg) scale(1.05);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+  .project-info {
+    flex: 3;
+  }
+
+  html.dark .project-item {
+    background-color: #242433;
+    box-shadow: 0 0 2rem 0.5rem hsla(200, 94%, 14%, 0.2);
+  }
+
+  img {
+    width: 20rem;
+    object-fit: cover;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
   .link {
     margin-right: 0.4rem;
     font: inherit;
     cursor: pointer;
     background-color: var(--color-buttons);
     padding: 0.5rem 1rem;
-    border: 0.1rem solid rgba(30, 30, 30, 1);
-    border-radius: 1.2vw;
+    border: 0.1rem solid #14132c;
+    border-radius: 0.9rem;
     display: inline-block;
     transition: background-color 250ms;
     position: relative;
     overflow: hidden;
     text-decoration: none;
-    color: #f7fff7;
+    color: #14132c;
+  }
+
+  html.dark .link {
+    color: #f1f5f9;
+    border: 0.1rem solid #f1f5f9;
+  }
+
+  html.dark .link::before {
+    background: hsla(200, 94%, 34%, 0.3);
   }
 
   .link:hover {
     background: var(--color-buttons-dim);
   }
-  
+
   .link > span {
     position: absolute;
     width: 33.33%;
@@ -86,20 +129,24 @@ const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
   .link::before {
     content: "";
     position: absolute;
-    background: rgba(2, 47, 70, 0.7);
+    background: hsla(200, 94%, 14%, 0.2);
     width: 10%;
     aspect-ratio: 1;
     border-radius: 50%;
     inset: 0;
     margin: auto;
     opacity: 0;
-    transition: transform 1000ms 1000ms, opacity: 1000ms;
+    transition:
+      transform 1000ms,
+      opacity 1000ms;
   }
 
   .link:active::before {
     transform: scale(25);
     opacity: 1;
-    transition: transform 500ms, opacity 250ms;
+    transition:
+      transform 500ms,
+      opacity 250ms;
   }
 
   .link:has(:first-child:active)::before {
@@ -110,10 +157,15 @@ const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
     margin-right: 0;
   }
 
-  .link:has(:first-child:active)::before
-    .link:has(:last-child:active)::before {
+  .link:has(:first-child:active)::before .link:has(:last-child:active)::before {
     transition:
       transform 250ms,
       opacity 250ms;
+  }
+
+  @media screen and (max-width: 600px) {
+    .project-item {
+      display: block;
+    }
   }
 </style>

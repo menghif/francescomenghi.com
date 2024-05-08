@@ -22,44 +22,18 @@ const { platform, link } = Astro.props;
 <style>
   a {
     display: flex;
-    align-items: center;
     font-size: 1.3rem;
-    color: #013a63;
-    &:focus {
-      border-radius: 0.9rem;
-    }
+    border-radius: 0.9rem;
     text-decoration: none;
+    gap: 0.6rem;
+    padding: 0.5rem;
+    align-items: center;
+    width: 10rem;
   }
 
-  html.dark a {
-    color: #a9d6e5;
-  }
-
-  .text {
-    margin: 0.6rem 1rem;
-  }
-
-  @media screen and (max-width: 699px) {
+  @media screen and (min-width: 700px) {
     a {
-      width: 11rem;
+      width: inherit;
     }
-  }
-
-  :global(.icon-fill) {
-    transition: fill 500ms;
-    fill: transparent;
-  }
-
-  :global(.dark) :global(.icon-outline) {
-    fill: white;
-  }
-  html.dark a:hover :global(.icon-fill) {
-    fill: hsl(216, 6%, 55%);
-    transition: fill 300ms;
-  }
-
-  a:hover :global(.icon-fill) {
-    fill: hsl(216, 6%, 80%);
-    transition: fill 300ms;
   }
 </style>

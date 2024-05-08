@@ -1,25 +1,59 @@
 :root {
-  --blue-100: #89c2d9;
-  --blue-200: #61a5c2;
-  --blue-300: #468faf;
-  --blue-400: #2c7da0;
-  --blue-500: #2a6f97;
-  --blue-600: #014f86;
-  --blue-700: #01497c;
-  --blue-800: #013a63;
-  --blue-900: #012a4a;
+  /* main color */
+  --hue: 196;
+  --saturation: 42%;
+  --lightness: 48%;
 }
 
 html {
-  background-color: #f1f5f9;
-  transition: background-color 300ms;
-  font-family: "Work Sans", sans-serif;
+  color-scheme: light;
+  --brand: hsl(var(--hue) var(--saturation) var(--lightness));
+  --text1: hsl(var(--hue) var(--saturation) 10%);
+  --text2: hsl(var(--hue) 30% 30%);
+  --surface1: hsl(var(--hue) 20% 90%);
+  --surface2: hsl(var(--hue) 20% 99%);
+  --surface3: hsl(var(--hue) 20% 92%);
+  --surface4: hsl(var(--hue) 20% 85%);
+  --surface-shadow: var(--hue) 10% 20%;
+  --shadow-strength: 0.02;
 }
 
 html.dark {
-  background-color: #0b0b15;
-  transition: background-color 300ms;
-  color: #f1f5f9;
+  color-scheme: dark;
+  --brand: hsl(
+    var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) / 1)
+  );
+  --text1: hsl(var(--hue) 15% 85%);
+  --text2: hsl(var(--hue) 5% 65%);
+  --surface1: hsl(var(--hue) 10% 10%);
+  --surface2: hsl(var(--hue) 10% 15%);
+  --surface3: hsl(var(--hue) 5% 20%);
+  --surface4: hsl(var(--hue) 5% 25%);
+  --surface-shadow: var(--hue) 50% 3%;
+  --shadow-strength: 0.2;
+}
+
+.rad-shadow {
+  border: 1px solid hsl(var(--hue) 10% 50% / 15%);
+  box-shadow: 0 1rem 0.5rem -0.5rem;
+  box-shadow:
+    0 2.8px 2.2px
+      hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
+    0 6.7px 5.3px
+      hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.01)),
+    0 12.5px 10px
+      hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
+    0 22.3px 17.9px
+      hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.02)),
+    0 41.8px 33.4px
+      hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
+    0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+}
+
+html {
+  background-color: var(--surface1);
+  /* transition: background-color 300ms; */
+  font-family: "Work Sans", sans-serif;
 }
 
 body {
@@ -28,6 +62,8 @@ body {
   max-width: 45rem;
   padding: 1rem;
   line-height: 1.5;
+  /* transition: all 300ms; */
+  color: var(--text1);
 }
 
 * {
@@ -40,6 +76,7 @@ h1 {
 }
 
 h2 {
+  color: var(--text2);
   margin: 0.5rem 0;
   font-family: "merriweather", serif;
 }
@@ -49,12 +86,14 @@ svg {
   height: 2rem;
 }
 
-.dark a {
-  color: #f1f5f9;
+a {
+  color: var(--text4);
 }
 
 .expanded {
-  display: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 img {
@@ -67,9 +106,52 @@ p {
   font-family: "Work Sans", sans-serif;
 }
 
+.box {
+  border-radius: 0.5rem;
+  /* transition: all 300ms; */
+  background-color: var(--surface3);
+}
+
+.icon-fill {
+  /* transition: fill 300ms; */
+  fill: transparent;
+}
+
+.icon-outline {
+  fill: var(--text1);
+}
+
+html.dark a:hover .icon-fill {
+  fill: var(--brand);
+  /* transition: fill 300ms; */
+}
+
+a:hover .icon-fill {
+  fill: hsl(
+    var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.4)
+  );
+  /* transition: fill 300ms; */
+}
+
 .hover-underline {
   display: inline-block;
   position: relative;
+}
+
+.tag {
+  color: var(--text2);
+  margin: 0.25rem;
+  border: dotted 1px var(--text2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.15rem;
+  background-color: var(--surface3);
+  /* transition: all 300ms; */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .hover-underline::after {
@@ -80,7 +162,7 @@ p {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #013a63;
+  background-color: var(--brand);
   transform-origin: bottom left;
   transition: transform 200ms ease-out;
 }
@@ -91,7 +173,7 @@ p {
   transform-origin: bottom left;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 550px) {
   .hamburger {
     display: none;
   }
@@ -101,10 +183,13 @@ p {
     position: static;
     width: auto;
     background: none;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .nav-links .label {
+  .nav-links a {
     display: inline-block;
+    width: inherit;
   }
 }
 

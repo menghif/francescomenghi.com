@@ -1,8 +1,8 @@
 ---
-const { url, title, pubDate } = Astro.props;
+const { url, title, pubDate, featured } = Astro.props;
 ---
 
-<li>
+<li class:list={[{ box: featured }, { "rad-shadow": featured }]}>
   <p>
     <a href={url} class="post">{title}</a>
     <span class="date"> {pubDate.toString().slice(4, 15)}</span>
@@ -10,6 +10,10 @@ const { url, title, pubDate } = Astro.props;
 </li>
 
 <style>
+  li {
+    flex: 1;
+  }
+
   p {
     margin: 1rem;
     font-size: 1.2rem;
@@ -27,5 +31,6 @@ const { url, title, pubDate } = Astro.props;
   .date {
     font-size: 0.8rem;
     font-style: italic;
+    margin-left: 0.6rem;
   }
 </style>

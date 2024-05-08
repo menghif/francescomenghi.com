@@ -14,7 +14,7 @@ interface Props {
 const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
 ---
 
-<section class="project-item">
+<section class="project-item rad-shadow">
   <div class="screenshot">
     <a href={appLink ? appLink : codeLink}
       ><Image src={image} alt={imageAlt} loading="eager" /></a
@@ -49,7 +49,8 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 1.2vw;
-    box-shadow: 0 0 1.5rem 0.1rem hsla(200, 94%, 14%, 0.1);
+    /* transition: all 300ms; */
+    background-color: var(--surface3);
   }
 
   .screenshot {
@@ -66,11 +67,11 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
   .project-info {
     flex: 3;
   }
-
+  /* 
   html.dark .project-item {
     background-color: #242433;
     box-shadow: 0 0 2rem 0.5rem hsla(200, 94%, 14%, 0.2);
-  }
+  } */
 
   img {
     width: 20rem;
@@ -80,7 +81,7 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
   h2 {
     margin-top: 0;
   }
-
+  /* 
   .link {
     margin-right: 0.4rem;
     font: inherit;
@@ -95,6 +96,7 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     overflow: hidden;
     text-decoration: none;
     color: #14132c;
+    transition: color 300ms;
   }
 
   html.dark .link {
@@ -161,7 +163,7 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     transition:
       transform 250ms,
       opacity 250ms;
-  }
+  } */
 
   @media screen and (max-width: 600px) {
     .project-item {

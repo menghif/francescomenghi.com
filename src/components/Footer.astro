@@ -4,36 +4,75 @@ import EmailIcon from "./icons/EmailIcon.astro";
 import GithubIcon from "./icons/GithubIcon.astro";
 import MastodonIcon from "./icons/MastodonIcon.astro";
 import LinkedinIcon from "./icons/LinkedinIcon.astro";
+import Image from "astro/components/Image.astro";
 ---
 
 <footer>
-  <div class="content-wrap">
-    <h2>Let's Keep in Touch!</h2>
-    <ul class="contact-list">
-      <Social platform="Email" link="mailto:francescomenghi@gmail.com">
-        <EmailIcon />
-      </Social>
-      <Social platform="Github" link="https://github.com/menghif">
-        <GithubIcon />
-      </Social>
-      <Social platform="Mastodon" link="https://social.lol/@francesco">
-        <MastodonIcon />
-      </Social>
-      <Social platform="LinkedIn" link="https://linkedin.com/in/menghif">
-        <LinkedinIcon />
-      </Social>
-    </ul>
+  <h2>Let's Connect!</h2>
+  <ul class="contact-list">
+    <Social platform="Email" link="mailto:francescomenghi@gmail.com">
+      <EmailIcon />
+    </Social>
+    <Social platform="Github" link="https://github.com/menghif">
+      <GithubIcon />
+    </Social>
+    <Social platform="Mastodon" link="https://social.lol/@francesco">
+      <MastodonIcon />
+    </Social>
+    <Social platform="LinkedIn" link="https://linkedin.com/in/menghif">
+      <LinkedinIcon />
+    </Social>
+  </ul>
+  <div class="source">
+    <p class="copyright">© Francesco Menghi</p>
+    <a class="astro-badge" href="https://astro.build"
+      ><Image
+        src="/builtWithAstro.svg"
+        alt="Built with Astro"
+        width="120"
+        height="20"
+      /></a
+    >
+    <a href="https://github.com/menghif/francescomenghi.com"
+      >Source code on GitHub</a
+    >
   </div>
 </footer>
 
 <style>
-  .content-wrap {
-    margin: 0 2rem;
-    padding: 3.2rem 0;
+  footer {
+    padding-top: 3rem;
+    font-size: 0.9rem;
   }
 
   .contact-list {
+    margin: 1rem;
     list-style-type: none;
     padding: 0;
+  }
+
+  .astro-badge {
+    height: 1.2rem;
+    border-radius: 0.3rem;
+  }
+
+  .source {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-underline-offset: 0.3rem;
+    padding: 1rem 0;
+    color: var(--text2);
+  }
+
+  .copyright {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    .source {
+      flex-direction: column;
+    }
   }
 </style>

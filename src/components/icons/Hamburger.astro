@@ -9,22 +9,15 @@
     border: 0;
     background: none;
     cursor: pointer;
+    border-radius: 0.9rem;
     padding: 0.3rem;
-    &:hover,
-    &:focus {
-      border-radius: 0.9rem;
-    }
   }
 
-  html.dark .hamburger .bar {
-    background: #fff;
-  }
-
-  .hamburger .bar {
+  .bar {
     margin: 0.4rem;
     width: 1.8rem;
     height: 0.2rem;
-    background: #000;
+    background: var(--text1);
     border-radius: 0.9rem;
     opacity: 1;
     transition:
@@ -39,7 +32,7 @@
 
   .close .bar:nth-child(2) {
     opacity: 0;
-    transition: opacity 200ms;
+    transition: opacity 300ms;
   }
 
   .close .bar:last-child {

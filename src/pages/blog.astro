@@ -2,13 +2,12 @@
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { fade } from "astro:transitions";
 const allPosts = await getCollection("posts");
 const pageTitle = "Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div transition:animate={fade({ duration: "300ms" })}>
+  <div>
     <h1>{pageTitle}</h1>
     <ul>
       {

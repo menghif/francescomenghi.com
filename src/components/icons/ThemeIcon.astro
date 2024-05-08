@@ -1,9 +1,14 @@
+---
+const fillTransition = "350ms";
+---
+
 <button id="themeToggle" aria-label="Theme toggle">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 256 256">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
     <path class="sun-fill" d="M184,128a56,56,0,1,1-56-56A56,56,0,0,1,184,128Z"
     ></path>
     <path
       class="sun"
+      data-transition={fillTransition}
       d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"
     ></path>
     <path
@@ -17,18 +22,17 @@
   >
 </button>
 
-<style>
+<style define:vars={{ fillTransition }}>
   #themeToggle {
-    height: 3rem;
-    dispaly: flex;
+    /* outline: auto; */
+    display: flex;
+    padding: 0.4rem;
     border: 0;
     background: none;
     cursor: pointer;
-    padding: 0.5rem;
-    &:hover,
-    &:focus {
-      border-radius: 0.9rem;
-    }
+    border-radius: 0.9rem;
+    justify-content: center;
+    align-items: center;
   }
 
   html.dark .moon,
@@ -39,29 +43,30 @@
   }
 
   html:not(.dark) .moon {
-    fill: black;
-    transition: fill 250ms;
+    fill: var(--text1);
+    transition: fill var(--fillTransition);
   }
 
   html.dark .sun {
-    fill: white;
-    transition: fill 250ms;
+    fill: var(--text1);
   }
 
   html:not(.dark) .moon-fill,
   html.dark .sun-fill {
     fill: transparent;
-    transition: fill 250ms;
+    transition: fill var(--fillTransition);
   }
 
   html.dark button:hover .sun-fill {
-    fill: hsl(216, 6%, 55%);
-    transition: fill 500ms;
+    fill: var(--brand);
+    transition: fill var(--fillTransition);
   }
 
   html:not(.dark) button:hover .moon-fill {
-    fill: hsl(216, 6%, 80%);
-    transition: fill 500ms;
+    fill: hsl(
+      var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.5)
+    );
+    transition: fill var(--fillTransition);
   }
 </style>
 
@@ -87,9 +92,7 @@
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
   });
-</script>
 
-<script>
   document.addEventListener("astro:page-load", () => {
     const theme = (() => {
       if (
@@ -116,6 +119,12 @@
 
       const isDark = element.classList.contains("dark");
       localStorage.setItem("theme", isDark ? "dark" : "light");
+
+      if (!isDark) {
+        // add fill transition to sun svg
+        const sun = document.querySelector(".sun") as SVGPathElement;
+        sun.style.transition = `fill ${sun.dataset.transition}`;
+      }
     };
 
     const themeToggle = document.getElementById("themeToggle");

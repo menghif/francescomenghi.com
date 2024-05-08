@@ -11,7 +11,7 @@ const pageTitle = "Projects";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div transition:animate={fade({ duration: "300ms" })}>
+  <div>
     <h1>{pageTitle}</h1>
 
     <div class="content-wrap divider">
@@ -69,12 +69,9 @@ const pageTitle = "Projects";
 </BaseLayout>
 
 <style>
-  .projects {
-    background: var(--color-background);
-  }
-
   .project-info {
     margin: 1rem;
+    /* transition: all 300ms; */
   }
 
   .project-item {
@@ -90,17 +87,5 @@ const pageTitle = "Projects";
   }
   .divider > section:last-of-type {
     border-bottom: none;
-  }
-
-  @media screen and (min-width: 750px) {
-    .left-image {
-      float: left;
-      margin-right: 20px;
-    }
-
-    .right-image {
-      float: right;
-      margin-left: 20px;
-    }
   }
 </style>

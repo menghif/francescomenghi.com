@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BlogPost from "../../components/BlogPost.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fade, slide } from "astro:transitions";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -26,35 +27,33 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <h1>Tag: <span class="tag">{tag}</span></h1>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    {
-      posts.map((post) => (
-        <BlogPost
-          url={`/posts/${post.slug}/`}
-          title={post.data.title}
-          pubDate={post.data.pubDate}
-        />
-      ))
-    }
-  </ul>
+  <div>
+    <h1>
+      Tag: <span transition:name={tag} class="tag">{tag}</span>
+    </h1>
+    <p>Posts tagged with {tag}</p>
+    <ul>
+      {
+        posts.map((post) => (
+          <BlogPost
+            url={`/posts/${post.slug}/`}
+            title={post.data.title}
+            pubDate={post.data.pubDate}
+          />
+        ))
+      }
+    </ul>
+    <a href="/tags/">All Tags</a>
+  </div>
 </BaseLayout>
 
 <style>
   h1 {
     display: flex;
-    align-items: center;
   }
 
   .tag {
-    color: #00539f;
-    margin: 0.5rem 1rem 0 1rem;
-    border: 1px dotted #a1a1a1;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    font-weight: lighter;
-    background-color: #f8fcfd;
+    margin: 0.6rem 1rem;
+    font-weight: 500;
   }
 </style>

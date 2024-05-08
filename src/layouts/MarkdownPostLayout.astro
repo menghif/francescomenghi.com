@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <div transition:animate={fade({ duration: "300ms" })}>
+  <div>
     <h1>
       {frontmatter.title}
     </h1>
@@ -14,7 +14,7 @@ const { frontmatter } = Astro.props;
     <p>
       <em>{frontmatter.description}</em>
     </p>
-    <p>Written by: <a href="/about/">{frontmatter.author}</a></p>
+    <p>Written by: <a class="author" href="/about/">{frontmatter.author}</a></p>
 
     <Image
       class="image"
@@ -24,38 +24,30 @@ const { frontmatter } = Astro.props;
       alt={frontmatter.image.alt}
       loading="eager"
     />
+    <slot />
+
     <div class="tags">
       {
         frontmatter.tags.map((tag) => (
-          <p class="tag">
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </p>
+          <a class="tag" href={`/tags/${tag}`}>
+            {tag}
+          </a>
         ))
       }
     </div>
-    <slot />
   </div>
 </BaseLayout>
 
 <style>
+  .author {
+    color: var(--text2);
+  }
+
   .image {
     border-radius: 0.6rem;
   }
-  a {
-    color: #00539f;
-  }
 
   .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
+    margin-top: 2rem;
   }
 </style>

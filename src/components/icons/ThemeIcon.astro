@@ -24,7 +24,6 @@ const fillTransition = "350ms";
 
 <style define:vars={{ fillTransition }}>
   #themeToggle {
-    /* outline: auto; */
     display: flex;
     padding: 0.4rem;
     border: 0;
@@ -67,6 +66,13 @@ const fillTransition = "350ms";
       var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.5)
     );
     transition: fill var(--fillTransition);
+  }
+
+  /* Hide Theme Toggle when Javascript is disabled */
+  @media (scripting: none) {
+    #themeToggle {
+      display: none;
+    }
   }
 </style>
 

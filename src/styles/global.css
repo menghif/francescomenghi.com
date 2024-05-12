@@ -229,12 +229,15 @@ a:hover .icon-fill {
 @media (scripting: none) {
   .nav-links {
     display: block;
-    background: none;
+    width: auto;
   }
+
+  .nav-links a {
+    display: inline-block;
+    width: inherit;
+  }
+
   .hamburger {
-    display: none;
-  }
-  #themeToggle {
     display: none;
   }
 }

@@ -23,11 +23,16 @@ const { pageTitle } = Astro.props;
     <link rel="stylesheet" href="/fonts/fonts.css" rel="preload" />
   </head>
   <body>
-    <Header />
-    <slot />
-    <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
+    <a class="skip-nav" href="#content">Skip navigation</a>
+    <div id="body-content">
+      <Header />
+      <div id="content">
+        <slot />
+      </div>
+      <Footer />
+      <script>
+        import "../scripts/menu.js";
+      </script>
+    </div>
   </body>
 </html>

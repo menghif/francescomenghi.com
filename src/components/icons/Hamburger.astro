@@ -1,11 +1,11 @@
-<button class="hamburger" aria-label="Menu toggle">
+<button id="hamburger" aria-label="Menu toggle">
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
 </button>
 
 <style>
-  .hamburger {
+  #hamburger {
     border: 0;
     background: none;
     cursor: pointer;
@@ -42,16 +42,14 @@
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const hamburger = document.querySelector(".hamburger");
+    const hamburger = document.getElementById("hamburger");
 
-    hamburger?.addEventListener("click", function (e) {
-      e.preventDefault();
+    hamburger?.addEventListener("click", () => {
+      const nav = document.querySelector(".nav-links");
+      nav?.classList.toggle("expanded");
       hamburger.classList.toggle("close");
-    });
 
-    hamburger?.addEventListener("enter", function (e) {
-      e.preventDefault();
-      hamburger.classList.toggle("close");
+      document.getElementById("home")?.focus();
     });
   });
 </script>

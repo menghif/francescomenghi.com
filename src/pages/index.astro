@@ -6,20 +6,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 const allPosts = await getCollection("posts");
+const me = "Francesco Menghi";
 ---
 
-<BaseLayout pageTitle="Francesco Menghi">
+<BaseLayout pageTitle={me}>
   <main>
     <div class="introduction">
       <Image
+        class="rad-shadow"
         height={200}
         densities={[2]}
         id="profile-picture"
         src={profilePic}
-        alt={"Portrait of Francesco Menghi"}
+        alt={`Portrait of ${me}`}
         loading="eager"
       />
-      <h1>Francesco Menghi</h1>
+      <h1>{me}</h1>
       <h2 class="subtitle">Software Developer</h2>
       <p class="description">
         Hello! 👋 I am a Software Developer enthusiastic about web development
@@ -51,6 +53,7 @@ const allPosts = await getCollection("posts");
   h1 {
     margin: 0.5rem;
     text-align: center;
+    text-transform: uppercase;
   }
 
   .latest-posts {

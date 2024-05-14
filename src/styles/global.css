@@ -54,7 +54,6 @@ html {
   background-color: var(--surface1);
   /* transition: background-color 300ms; */
   font-family: "Work Sans", sans-serif;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -179,6 +178,11 @@ a:hover .icon-fill {
   flex-wrap: wrap;
 }
 
+.tags-link {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
 .hover-underline::after {
   content: "";
   position: absolute;
@@ -199,7 +203,7 @@ a:hover .icon-fill {
 }
 
 @media screen and (min-width: 550px) {
-  .hamburger {
+  #hamburger {
     display: none;
   }
 
@@ -237,7 +241,7 @@ a:hover .icon-fill {
     width: inherit;
   }
 
-  .hamburger {
+  #hamburger {
     display: none;
   }
 }

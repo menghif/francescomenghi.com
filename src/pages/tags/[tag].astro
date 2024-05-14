@@ -36,14 +36,14 @@ const { posts } = Astro.props;
       {
         posts.map((post) => (
           <BlogPost
-            url={`/posts/${post.slug}/`}
+            url={`/blog/${post.slug}`}
             title={post.data.title}
             pubDate={post.data.pubDate}
           />
         ))
       }
     </ul>
-    <a class="tags-link" href="/tags/">All Tags</a>
+    <a class="tags-link" href="/tags">All Tags</a>
   </div>
 </BaseLayout>
 

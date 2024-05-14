@@ -52,7 +52,6 @@ html.dark {
 
 html {
   background-color: var(--surface1);
-  /* transition: background-color 300ms; */
   font-family: "Work Sans", sans-serif;
 }
 
@@ -115,12 +114,10 @@ p {
 
 .box {
   border-radius: 0.5rem;
-  /* transition: all 300ms; */
   background-color: var(--surface3);
 }
 
 .icon-fill {
-  /* transition: fill 300ms; */
   fill: transparent;
 }
 
@@ -130,14 +127,12 @@ p {
 
 html.dark a:hover .icon-fill {
   fill: var(--brand);
-  /* transition: fill 300ms; */
 }
 
 a:hover .icon-fill {
   fill: hsl(
     var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.4)
   );
-  /* transition: fill 300ms; */
 }
 
 .skip-nav {
@@ -170,7 +165,6 @@ a:hover .icon-fill {
   padding: 0.5rem 1rem;
   font-size: 1.15rem;
   background-color: var(--surface3);
-  /* transition: all 300ms; */
 }
 
 .tags {

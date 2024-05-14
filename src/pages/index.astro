@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import profilePic from "../assets/profile-pic.jpeg";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 const allPosts = await getCollection("posts");

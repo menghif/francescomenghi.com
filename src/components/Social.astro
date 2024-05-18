@@ -8,12 +8,12 @@ const { platform, link } = Astro.props;
     platform === "Mastodon" ? (
       <a rel="me" class="social-link" href={link}>
         <slot class="icon" />
-        <span class="text hover-underline">{platform}</span>
+        <span class="text">{platform}</span>
       </a>
     ) : (
       <a href={link}>
         <slot class="icon" />
-        <span class="text hover-underline">{platform}</span>
+        <span class="text">{platform}</span>
       </a>
     )
   }
@@ -29,6 +29,11 @@ const { platform, link } = Astro.props;
     padding: 0.5rem;
     align-items: center;
     width: 10rem;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
   }
 
   @media screen and (min-width: 700px) {

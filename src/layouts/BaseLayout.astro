@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 const { pageTitle } = Astro.props;
+import "@fontsource-variable/work-sans";
+import "@fontsource/merriweather";
 ---
 
 <html lang="en">
@@ -20,7 +22,6 @@ const { pageTitle } = Astro.props;
       title="Francesco Menghi's Blog"
       href={`${Astro.site}rss.xml`}
     />
-    <link rel="stylesheet" href="/fonts/fonts.css" rel="preload" />
   </head>
   <body>
     <a class="skip-nav" href="#content">Skip navigation</a>

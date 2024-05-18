@@ -2,13 +2,17 @@
 import { getCollection } from "astro:content";
 import BlogPost from "../../components/BlogPost.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import RssIcon from "../../components/icons/RssIcon.astro";
 const allPosts = await getCollection("posts");
 const pageTitle = "Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div>
-    <h1>{pageTitle}</h1>
+    <div class="blog-header">
+      <h1>{pageTitle}</h1>
+      <a href=`${Astro.site}rss.xml` aria-label="RSS Link"><RssIcon /></a>
+    </div>
     <ul>
       {
         allPosts.map((post) => (
@@ -24,3 +28,17 @@ const pageTitle = "Blog";
     <a class="tags-link" href="/tags">All Tags</a>
   </div>
 </BaseLayout>
+
+<style>
+  .blog-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .blog-header a {
+    padding-top: 0.25rem;
+    align-items: center;
+    font-size: 0.1rem;
+  }
+</style>

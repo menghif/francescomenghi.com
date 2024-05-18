@@ -30,7 +30,7 @@ const { posts } = Astro.props;
     <h1>
       Tag: <span transition:name={tag} class="tag">{tag}</span>
     </h1>
-    <p>Posts tagged with {tag}</p>
+    <p>Posts tagged with <i>{tag}</i>:</p>
     <ul>
       {
         posts.map((post) => (
@@ -53,6 +53,6 @@ const { posts } = Astro.props;
 
   .tag {
     margin: 0.6rem 1rem;
-    font-weight: 500;
+    font-weight: 400;
   }
 </style>

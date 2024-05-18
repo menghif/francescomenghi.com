@@ -24,25 +24,18 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     <h2>{title}</h2>
     <p>{body}</p>
     {
-      appLink != "" ? (
-        <a class="link" href={appLink}>
-          <span />
-          View {type}
-          <span />
-        </a>
-      ) : (
-        <span />
-      )
+      /* prettier-ignore */
+      appLink && <a class="link" href={appLink}>View {type}</a>
     }
-    <a class="link" href={codeLink}>
-      <span></span>
-       Source Code
-      <span></span>
-    </a>
+    <a class="link" href={codeLink}> Source Code</a>
   </div>
 </section>
 
 <style>
+  p {
+    font-size: 1.1rem;
+  }
+
   .project-item {
     display: flex;
     gap: 2rem;
@@ -66,11 +59,6 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
   .project-info {
     flex: 3;
   }
-  /* 
-  html.dark .project-item {
-    background-color: #242433;
-    box-shadow: 0 0 2rem 0.5rem hsla(200, 94%, 14%, 0.2);
-  } */
 
   img {
     width: 20rem;
@@ -80,89 +68,10 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
   h2 {
     margin-top: 0;
   }
-  /* 
+
   .link {
-    margin-right: 0.4rem;
-    font: inherit;
-    cursor: pointer;
-    background-color: var(--color-buttons);
-    padding: 0.5rem 1rem;
-    border: 0.1rem solid #14132c;
-    border-radius: 0.9rem;
-    display: inline-block;
-    transition: background-color 250ms;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-    color: #14132c;
-    transition: color 300ms;
+    margin-right: 0.5rem;
   }
-
-  html.dark .link {
-    color: #f1f5f9;
-    border: 0.1rem solid #f1f5f9;
-  }
-
-  html.dark .link::before {
-    background: hsla(200, 94%, 34%, 0.3);
-  }
-
-  .link:hover {
-    background: var(--color-buttons-dim);
-  }
-
-  .link > span {
-    position: absolute;
-    width: 33.33%;
-    height: 100%;
-    opacity: 50%;
-  }
-
-  .link > :first-child {
-    left: 0;
-    top: 0;
-  }
-  .link > :last-child {
-    right: 0;
-    top: 0;
-  }
-
-  .link::before {
-    content: "";
-    position: absolute;
-    background: hsla(200, 94%, 14%, 0.2);
-    width: 10%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    inset: 0;
-    margin: auto;
-    opacity: 0;
-    transition:
-      transform 1000ms,
-      opacity 1000ms;
-  }
-
-  .link:active::before {
-    transform: scale(25);
-    opacity: 1;
-    transition:
-      transform 500ms,
-      opacity 250ms;
-  }
-
-  .link:has(:first-child:active)::before {
-    margin-left: 0;
-  }
-
-  .link:has(:last-child:active)::before {
-    margin-right: 0;
-  }
-
-  .link:has(:first-child:active)::before .link:has(:last-child:active)::before {
-    transition:
-      transform 250ms,
-      opacity 250ms;
-  } */
 
   @media screen and (max-width: 600px) {
     .project-item {

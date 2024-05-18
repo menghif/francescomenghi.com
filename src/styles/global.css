@@ -60,6 +60,9 @@ body {
   padding: 1rem;
   line-height: 1.5;
   color: var(--text1);
+  font-family: "Work Sans Variable", sans-serif;
+  font-size: 1.1rem;
+  transition: font-size 250ms ease;
 }
 
 #body-content {
@@ -78,7 +81,6 @@ body {
 
 h1 {
   margin: 1rem 0;
-  font-size: 2.5rem;
 }
 
 h2 {
@@ -94,6 +96,8 @@ svg {
 
 a {
   color: var(--text4);
+  text-underline-offset: 0.25rem;
+  text-decoration-color: var(--brand);
 }
 
 .expanded {
@@ -130,6 +134,8 @@ html.dark a:hover .icon-fill {
 }
 
 a:hover .icon-fill {
+  transition: fill 200ms;
+
   fill: hsl(
     var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.4)
   );
@@ -152,11 +158,6 @@ a:hover .icon-fill {
   transition: transform 200ms ease-in;
 }
 
-.hover-underline {
-  display: inline-block;
-  position: relative;
-}
-
 .tag {
   color: var(--text2);
   margin: 0.25rem;
@@ -175,25 +176,6 @@ a:hover .icon-fill {
 .tags-link {
   font-size: 1.3rem;
   font-style: italic;
-}
-
-.hover-underline::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--brand);
-  transform-origin: bottom left;
-  transition: transform 200ms ease-out;
-}
-
-.hover-underline:hover::after {
-  transform: scaleX(1);
-  transition: transform 100ms ease-out;
-  transform-origin: bottom left;
 }
 
 @media screen and (min-width: 550px) {
@@ -217,6 +199,14 @@ a:hover .icon-fill {
 }
 
 @media screen and (min-width: 700px) {
+  body {
+    font-size: 1.25rem;
+  }
+
+  code {
+    font-size: 2rem;
+  }
+
   .contact-list {
     display: flex;
     justify-content: space-between;

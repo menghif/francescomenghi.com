@@ -112,6 +112,7 @@ img {
 }
 
 code {
+  font-size: 0.875rem;
   padding: 0.25rem;
   border-radius: 0.4rem;
   background-color: var(--surface4);
@@ -214,7 +215,7 @@ a:hover .icon-fill {
   }
 
   code {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   .contact-list {

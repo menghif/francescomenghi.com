@@ -22,5 +22,3 @@ const greeting = "Hello";
 
 console.log(greeting + "Francesco");
 ```
-
-![telescope app screenshot](../../assets/telescope-thumbnail.png)

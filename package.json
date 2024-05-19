@@ -12,8 +12,6 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.5",
-    "@fontsource-variable/work-sans": "^5.0.19",
-    "@fontsource/merriweather": "^5.0.13",
     "astro": "^4.7.1",
     "astro-expressive-code": "^0.35.2",
     "markdown-it": "^14.1.0",

@@ -2,7 +2,7 @@
 const { url, title, pubDate, featured } = Astro.props;
 ---
 
-<li class:list={[{ box: featured }, { "rad-shadow": featured }]}>
+<li class:list={[{ box: featured }, { "smooth-shadow": featured }]}>
   <p>
     <a href={url} class="post">{title}</a> ·
     <span class="date"> {pubDate.toString().slice(4, 15)}</span>
@@ -12,10 +12,11 @@ const { url, title, pubDate, featured } = Astro.props;
 <style>
   li {
     flex: 1;
+    list-style-type: none;
   }
 
   p {
-    margin: 1rem;
+    margin: 1rem 0;
   }
 
   .post {
@@ -31,5 +32,9 @@ const { url, title, pubDate, featured } = Astro.props;
   .date {
     font-size: 85%;
     font-style: italic;
+  }
+
+  .box {
+    padding-inline: 1rem;
   }
 </style>

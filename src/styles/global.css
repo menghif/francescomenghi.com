@@ -33,7 +33,7 @@ html.dark {
   --shadow-strength: 0.2;
 }
 
-.rad-shadow {
+.smooth-shadow {
   border: 1px solid hsl(var(--hue) 10% 50% / 15%);
   box-shadow: 0 1rem 0.5rem -0.5rem;
   box-shadow:
@@ -60,8 +60,8 @@ body {
   padding: 1rem;
   line-height: 1.5;
   color: var(--text1);
-  font-family: "Work Sans Variable", sans-serif;
-  font-size: 1.1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   transition: font-size 250ms ease;
 }
 
@@ -80,13 +80,13 @@ body {
 }
 
 h1 {
+  font-size: 2.5rem;
   margin: 1rem 0;
 }
 
 h2 {
   color: var(--text2);
   margin: 0.5rem 0;
-  font-family: "merriweather", serif;
 }
 
 svg {
@@ -111,6 +111,12 @@ img {
   height: auto;
 }
 
+code {
+  padding: 0.25rem;
+  border-radius: 0.4rem;
+  background-color: var(--surface4);
+}
+
 p {
   text-wrap: pretty;
   font-family: "Work Sans", sans-serif;
@@ -129,16 +135,10 @@ p {
   fill: var(--text1);
 }
 
-html.dark a:hover .icon-fill {
-  fill: var(--brand);
-}
-
 a:hover .icon-fill {
   transition: fill 200ms;
-
-  fill: hsl(
-    var(--hue) calc(var(--saturation) / 1.5) calc(var(--lightness) * 1.4)
-  );
+  fill: var(--brand);
+  opacity: 50%;
 }
 
 .skip-nav {
@@ -162,9 +162,9 @@ a:hover .icon-fill {
   color: var(--text2);
   margin: 0.25rem;
   border: dotted 1px var(--text2);
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
   padding: 0.5rem 1rem;
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   background-color: var(--surface3);
 }
 
@@ -174,8 +174,18 @@ a:hover .icon-fill {
 }
 
 .tags-link {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-style: italic;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 6.5rem;
+}
+
+.tags-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
 }
 
 @media screen and (min-width: 550px) {
@@ -200,11 +210,11 @@ a:hover .icon-fill {
 
 @media screen and (min-width: 700px) {
   body {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 
   code {
-    font-size: 2rem;
+    font-size: 1.125rem;
   }
 
   .contact-list {

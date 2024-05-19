@@ -1,6 +1,7 @@
 ---
 layout: "../layouts/AboutLayout.astro"
 title: "About Me"
+description: "About Francesco Menghi"
 ---
 
 Hello! 👋 I am a Software Developer enthusiastic about web development and Open
@@ -16,7 +17,7 @@ from York University. I enjoy traveling ✈️ playing football ⚽️ and being
 - Typescript
 - React
 
-### Some of my hobbies
+## Hobbies
 
 - biking
 - soccer

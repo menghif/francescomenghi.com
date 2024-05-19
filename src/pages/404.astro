@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "404";
+---
+
+<BaseLayout pageTitle=`Error ${title}`>
+  <div class="content">
+    <h1>{title}</h1>
+    <p>Page Not Found! 👀</p>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: 10rem;
+    font-style: italic;
+    margin-bottom: 0;
+    color: var(--text2);
+  }
+
+  p {
+    font-size: 1.8rem;
+    margin-top: 0;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>

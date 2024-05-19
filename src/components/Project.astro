@@ -14,7 +14,7 @@ interface Props {
 const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
 ---
 
-<section class="project-item rad-shadow">
+<section class="project-item smooth-shadow">
   <div class="screenshot">
     <a href={appLink ? appLink : codeLink}
       ><Image src={image} alt={imageAlt} loading="eager" /></a

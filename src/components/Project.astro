@@ -17,7 +17,13 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
 <section class="project-item smooth-shadow">
   <div class="screenshot">
     <a href={appLink ? appLink : codeLink}
-      ><Image src={image} alt={imageAlt} loading="eager" /></a
+      ><Image
+        src={image}
+        width={320}
+        densities={[2]}
+        alt={imageAlt}
+        loading="eager"
+      /></a
     >
   </div>
   <div class="project-info">

@@ -201,17 +201,18 @@ a:hover .icon-fill {
   text-decoration-color: var(--brand);
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 700px) {
   #hamburger {
     display: none;
   }
 
   .nav-links {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
     position: static;
     width: auto;
     background: none;
-    flex-direction: column;
     align-items: center;
   }
 

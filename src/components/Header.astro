@@ -6,11 +6,14 @@ import ThemeIcon from "./icons/ThemeIcon.astro";
 
 <header>
   <nav>
-    <Navigation />
+    <div class="home">
+      <a class="home-link" href="/">Francesco</a>
+    </div>
     <div class="icons">
       <ThemeIcon />
       <Hamburger />
     </div>
+    <Navigation />
   </nav>
 </header>
 
@@ -29,23 +32,46 @@ import ThemeIcon from "./icons/ThemeIcon.astro";
     margin-bottom: 0.1rem;
   }
 
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 0.4rem;
+  }
+
+  .home {
+    flex: 3;
+    font-size: 1.4rem;
+    /* font-family: monospace; */
+    font-weight: bold;
+  }
+
+  .home-link {
+    padding: 0.3rem 0.5rem;
+    border-radius: 1.5rem 1rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    color: var(--text2);
+    &:hover {
+      background-color: var(--surface4);
+    }
+  }
+
   .icons {
+    flex: 1;
     display: flex;
     justify-content: flex-end;
   }
 
-  nav {
-    display: flex;
-    flex-direction: column-reverse;
-    padding-bottom: 0.3rem;
-  }
+  @media screen and (min-width: 700px) {
+    .icons {
+      flex: 0;
+      order: 1;
+    }
 
-  @media screen and (min-width: 550px) {
     nav {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+      gap: 1rem;
     }
   }
 </style>

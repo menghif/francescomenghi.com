@@ -9,7 +9,7 @@ import ThemeIcon from "./icons/ThemeIcon.astro";
     <Navigation />
     <div class="icons">
       <ThemeIcon />
-      <Hamburger />
+      <!-- <Hamburger /> -->
     </div>
   </nav>
 </header>
@@ -36,16 +36,10 @@ import ThemeIcon from "./icons/ThemeIcon.astro";
 
   nav {
     display: flex;
-    flex-direction: column-reverse;
-    padding-bottom: 0.3rem;
-  }
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
-  @media screen and (min-width: 550px) {
-    nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
+    padding-bottom: 0.3rem;
   }
 </style>

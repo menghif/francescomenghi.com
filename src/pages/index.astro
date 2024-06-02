@@ -6,15 +6,16 @@ import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 const allPosts = await getCollection("posts");
 const me = "Francesco Menghi";
+const description = "The personal website of Francesco Menghi";
 ---
 
-<BaseLayout pageTitle={me}>
+<BaseLayout pageTitle={me} description={description}>
   <main>
     <div class="introduction">
       <Image
         class="smooth-shadow"
         height={200}
-        densities={[2]}
+        densities={[3]}
         id="profile-picture"
         src={profilePic}
         alt={`Portrait of ${me}`}
@@ -25,8 +26,8 @@ const me = "Francesco Menghi";
     </div>
     <p></p>
     <p class="description">
-      Hello! 👋 I'm Francesco, I'm a software developer enthusiastic about web
-      development and Open Source.
+      Ciao! 👋 I'm Francesco, I'm a software developer interested in all things
+      Web Development and Open Source.
     </p>
     <h2>Latest Posts</h2>
     <ul class="latest-posts">
@@ -51,8 +52,10 @@ const me = "Francesco Menghi";
     margin-top: 0.5rem;
     margin-bottom: 0;
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+    font-weight: bold;
+    background: -webkit-linear-gradient(var(--text2), var(--text1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .latest-posts {
@@ -74,7 +77,9 @@ const me = "Francesco Menghi";
   .subtitle {
     margin: 0;
     opacity: 80%;
+    font-size: 1.4rem;
     font-style: italic;
+    font-weight: 500;
   }
 
   .description {

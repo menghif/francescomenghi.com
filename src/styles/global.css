@@ -1,6 +1,6 @@
 :root {
   /* main color */
-  --hue: 196;
+  --hue: 182;
   --saturation: 42%;
   --lightness: 48%;
 }
@@ -11,7 +11,7 @@ html {
   --text1: hsl(var(--hue) var(--saturation) 10%);
   --text2: hsl(var(--hue) 30% 30%);
   --surface1: hsl(var(--hue) 20% 90%);
-  --surface2: hsl(var(--hue) 20% 99%);
+  --surface2: hsl(var(--hue) 20% 95%);
   --surface3: hsl(var(--hue) 20% 92%);
   --surface4: hsl(var(--hue) 20% 85%);
   --surface-shadow: var(--hue) 10% 20%;
@@ -52,17 +52,16 @@ html.dark {
 
 html {
   background-color: var(--surface1);
-  font-family: "Work Sans", sans-serif;
 }
 
 body {
   margin: 0;
   padding: 1rem;
-  line-height: 1.5;
+  line-height: 1.65;
+  font-size: 1.125rem;
   color: var(--text1);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   transition: font-size 250ms ease;
+  font-family: "Montserrat Variable", sans-serif;
 }
 
 #body-content {
@@ -82,6 +81,7 @@ body {
 h1 {
   font-size: 2.5rem;
   margin: 1rem 0;
+  font-weight: bold;
 }
 
 h2 {
@@ -132,7 +132,6 @@ code {
 
 p {
   text-wrap: pretty;
-  font-family: "Work Sans", sans-serif;
 }
 
 .box {
@@ -187,8 +186,7 @@ a:hover .icon-fill {
 }
 
 .tags-link {
-  font-size: 1.5rem;
-  font-style: italic;
+  font-size: 1.4rem;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -199,6 +197,26 @@ a:hover .icon-fill {
 .tags-link:hover {
   text-decoration: underline;
   text-decoration-color: var(--brand);
+}
+
+blockquote {
+  background: var(--surface2);
+  border-radius: 0 0.4rem 0.4rem 0;
+  border-left: 0.2rem solid var(--text2);
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+}
+blockquote:before {
+  font-family: "PT Serif Caption", serif;
+  color: var(--text2);
+  content: open-quote;
+  font-size: 4rem;
+  line-height: 0.1rem;
+  margin-right: 0.5rem;
+  vertical-align: -1.5rem;
+}
+blockquote p {
+  display: inline;
 }
 
 @media screen and (min-width: 550px) {
@@ -223,7 +241,7 @@ a:hover .icon-fill {
 
 @media screen and (min-width: 700px) {
   body {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 
   code {

@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BlogPost from "../../components/BlogPost.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RssIcon from "../../components/icons/RssIcon.astro";
+import TagIcon from "../../components/icons/TagIcon.astro";
+const allPosts = await getCollection("posts");
+const pageTitle = "Blog";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h1>
+    {pageTitle}
+    <a href={`${Astro.site}rss.xml`} aria-label="RSS Link"><RssIcon /></a>
+  </h1>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <BlogPost
+          url={`/blog/${post.slug}`}
+          title={post.data.title}
+          pubDate={post.data.pubDate}
+        />
+      ))
+    }
+  </ul>
+
+  <a class="tags-link" href="/tags"><TagIcon />Tags</a>
+</BaseLayout>
+
+<style>
+  ul {
+    padding: 0.1rem 0;
+  }
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  h1 a {
+    padding-top: 0.6rem;
+    align-items: center;
+    font-size: 0.1rem;
+  }
+</style>

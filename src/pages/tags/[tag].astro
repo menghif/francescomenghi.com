@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import BlogPost from "../../components/BlogPost.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagIcon from "../../components/icons/TagIcon.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <div>
+    <h1>
+      Tag: <a transition:name={tag} class="tag" href="/tags">{tag}</a>
+    </h1>
+    <ul>
+      {
+        posts.map((post) => (
+          <BlogPost
+            url={`/blog/${post.slug}`}
+            title={post.data.title}
+            pubDate={post.data.pubDate}
+          />
+        ))
+      }
+    </ul>
+    <a class="tags-link" href="/tags"><TagIcon />Tags</a>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  .tag {
+    margin-top: 1rem;
+    font-weight: 400;
+  }
+</style>

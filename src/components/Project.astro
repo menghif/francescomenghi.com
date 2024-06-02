@@ -1,119 +1,87 @@
 ---
-import { getImage } from "astro:assets";
+import { Image } from "astro:assets";
 
 interface Props {
   title: string;
   type: string;
   body: string;
   image: ImageMetadata;
-  imagePos: string;
   imageAlt: string;
   appLink: string;
   codeLink: string;
 }
 
-const { title, type, body, image, imagePos, imageAlt, appLink, codeLink } =
-  Astro.props;
-
-  const screenshot1x = await getImage({src: image, width: 300})
-  const screenshot2x = await getImage({src: image, width: 600})
+const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
 ---
 
-<section class="project-item">
-  <picture>
-    <source srcset={screenshot2x.src} media="(min-resolution: 2dppx)" />
-    <img
-      src={screenshot1x.src}
-      {...screenshot1x.attributes}
-      class={imagePos === "left" ? "left-image" : "right-image"}
-      alt={imageAlt}
-    />
-  </picture>
+<section class="project-item smooth-shadow">
+  <div class="screenshot">
+    <a href={appLink ? appLink : codeLink}
+      ><Image
+        src={image}
+        width={320}
+        densities={[2]}
+        alt={imageAlt}
+        loading="eager"
+      /></a
+    >
+  </div>
   <div class="project-info">
-    <h3>{title}</h3>
+    <h2>{title}</h2>
     <p>{body}</p>
-    {appLink != "" ?
-    <a class="link" href={appLink}>
-      <span></span>
-       View {type}
-      <span></span>
-    </a> : <span></span>}
-    <a class="link" href={codeLink}>
-      <span></span>
-       Source Code
-      <span></span>
-    </a>
+    {
+      /* prettier-ignore */
+      appLink && <a class="link" href={appLink}>View {type}</a>
+    }
+    <a class="link" href={codeLink}> Source Code</a>
   </div>
 </section>
 
 <style>
-  .link {
-    margin-right: 0.4rem;
-    font: inherit;
-    cursor: pointer;
-    background-color: var(--color-buttons);
-    padding: 0.5rem 1rem;
-    border: 0.1rem solid rgba(30, 30, 30, 1);
+  p {
+    font-size: 1.1rem;
+  }
+
+  .project-item {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem;
     border-radius: 1.2vw;
-    display: inline-block;
-    transition: background-color 250ms;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-    color: #f7fff7;
+    background-color: var(--surface3);
   }
 
-  .link:hover {
-    background: var(--color-buttons-dim);
+  .screenshot {
+    flex: 2;
+
+    transition: 300ms ease all;
+    &:hover {
+      cursor: pointer;
+      transform: perspective(600px) rotateY(6deg) scale(1.05);
+      filter: blur(0);
+      opacity: 1;
+    }
   }
-  
-  .link > span {
-    position: absolute;
-    width: 33.33%;
-    height: 100%;
-    opacity: 50%;
+  .project-info {
+    flex: 3;
   }
 
-  .link > :first-child {
-    left: 0;
-    top: 0;
-  }
-  .link > :last-child {
-    right: 0;
-    top: 0;
+  img {
+    width: 20rem;
+    object-fit: cover;
   }
 
-  .link::before {
-    content: "";
-    position: absolute;
-    background: rgba(2, 47, 70, 0.7);
-    width: 10%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    inset: 0;
-    margin: auto;
-    opacity: 0;
-    transition: transform 1000ms 1000ms, opacity: 1000ms;
+  h2 {
+    margin-top: 0;
   }
 
-  .link:active::before {
-    transform: scale(25);
-    opacity: 1;
-    transition: transform 500ms, opacity 250ms;
+  .link {
+    margin-right: 0.5rem;
   }
 
-  .link:has(:first-child:active)::before {
-    margin-left: 0;
-  }
-
-  .link:has(:last-child:active)::before {
-    margin-right: 0;
-  }
-
-  .link:has(:first-child:active)::before
-    .link:has(:last-child:active)::before {
-    transition:
-      transform 250ms,
-      opacity 250ms;
+  @media screen and (max-width: 600px) {
+    .project-item {
+      display: block;
+    }
   }
 </style>

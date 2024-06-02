@@ -1,339 +1,99 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Project from "../components/Project.astro";
-import { Image, getImage } from "astro:assets";
-
+import { Image } from "astro:assets";
 import profilePic from "../assets/profile-pic.jpeg";
-import telescopeScreenshot from "../assets/telescope-thumbnail.png";
-import nycRestaurantsScreenshot from "../assets/nyc-restaurant-app.png";
-import groceryStoreScreenshot from "../assets/grocery-store-frontend.png";
-import bikeShareMap from "../assets/bike-share-app.png";
-import staticDodo from "../assets/static-dodo-npmjs.png";
-
-const profilePic1x = await getImage({
-  src: profilePic,
-  width: 200,
-});
-const profilePic2x = await getImage({
-  src: profilePic,
-  width: 400,
-});
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import BlogPost from "../components/BlogPost.astro";
+const allPosts = await getCollection("posts");
+const me = "Francesco Menghi";
+const description = "The personal website of Francesco Menghi";
 ---
 
-<Layout title="Francesco Menghi">
+<BaseLayout pageTitle={me} description={description}>
   <main>
-    <header>
-      <div class="header content-wrap">
-        <picture>
-          <source srcset={profilePic2x.src} media="(min-resolution: 2dppx)" />
-          <img
-            id="profile-picture"
-            src={profilePic1x.src}
-            {...profilePic1x.attributes}
-            alt="Profile picture"
-          />
-        </picture>
-        <h1>Francesco Menghi</h1>
-        <h2 class="subtitle">Software Developer</h2>
-        <p class="description">
-          Hello! 👋 I am a Software Developer enthusiastic about web development
-          and Open Source. I graduated from Seneca College with a Computer
-          Programming and Analysis diploma. In my past life, I worked in finance
-          with a Bachelor's in Economics from York University. I enjoy
-          travelling ✈️ playing football ⚽️ and being outdoors 🌳
-        </p>
-      </div>
-    </header>
-
-    <section class="projects">
-      <div class="content-wrap divider">
-        <h2>Featured Projects</h2>
-
-        <!-- Project 1 -->
-        <Project
-          title="Telescope (Contributor)"
-          type="App"
-          body="Worked with a group of students on a blogging aggregator web app, built using a React frontend and micro-services as backend."
-          image={telescopeScreenshot}
-          imagePos="left"
-          imageAlt="Telescope app homepage screenshot"
-          appLink=""
-          codeLink="https://github.com/Seneca-CDOT/telescope"
-        />
-
-        <!-- Project 2 -->
-        <Project
-          title="React App"
-          type="App"
-          body="Designed and implemented a React web app to display restaurants in New York City using the MongoDB Atlas sample database, React-Bootstrap components and Leaflet maps."
-          image={nycRestaurantsScreenshot}
-          imagePos="right"
-          imageAlt="React restaurant app screenshot"
-          appLink="https://restaurants-app.menghi.me"
-          codeLink="https://github.com/menghif/restaurants-app"
-        />
-
-        <!-- Project 3 -->
-        <Project
-          title="Bike Share Map"
-          type="App"
-          body="Web app to access live Bike Share Toronto data, with capability to access user location to display nearby bikes."
-          image={bikeShareMap}
-          imagePos="left"
-          imageAlt="Bike Share Map screenshot"
-          appLink="https://bikeshare.menghi.me"
-          codeLink="https://github.com/menghif/bike-toronto"
-        />
-
-        <!-- Project 4 -->
-        <Project
-          title="Static Site Generator"
-          type="Package"
-          body="Command Line tool built with NodeJS that converts text and/or markdown files into HTML pages."
-          image={staticDodo}
-          imagePos="right"
-          imageAlt="Static Dodo Npmjs webpage screenshot"
-          appLink="https://www.npmjs.com/package/static-dodo"
-          codeLink="https://github.com/menghif/static-dodo"
-        />
-
-        <!-- Project 5 -->
-        <Project
-          title="Grocery Store Frontend"
-          type="App"
-          body="Designed and implemented the frontend for a grocery store using HTML, CSS and Javascript."
-          image={groceryStoreScreenshot}
-          imagePos="left"
-          imageAlt="Grocery store frontend screenshot"
-          appLink="https://grocery-store.menghi.me"
-          codeLink="https://github.com/menghif/grocery-store-frontend"
-        />
-      </div>
-    </section>
-
-    <footer>
-      <div class="content-wrap">
-        <h2>Let's Keep in Touch!</h2>
-        <ul class="contact-list">
-          <li>
-            <img
-              class="icon"
-              alt="Email icon"
-              width="25rem"
-              height="25rem"
-              src="email.svg"
+    <div class="introduction">
+      <Image
+        class="smooth-shadow"
+        height={200}
+        densities={[3]}
+        id="profile-picture"
+        src={profilePic}
+        alt={`Portrait of ${me}`}
+        loading="eager"
+      />
+      <h1>{me}</h1>
+      <h2 class="subtitle">Software Developer</h2>
+    </div>
+    <p></p>
+    <p class="description">
+      Ciao! 👋 I'm Francesco, I'm a software developer interested in all things
+      Web Development and Open Source.
+    </p>
+    <h2>Latest Posts</h2>
+    <ul class="latest-posts">
+      {
+        allPosts
+          .slice(0, 3)
+          .map((post) => (
+            <BlogPost
+              featured
+              url={`/blog/${post.slug}`}
+              title={post.data.title}
+              pubDate={post.data.pubDate}
             />
-            <a href="mailto:francescomenghi@gmail.com">Email</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              alt="Github icon"
-              width="25rem"
-              height="25rem"
-              src="github.svg"
-            />
-            <a href="http://github.com/menghif">Github</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              alt="Mastodon icon"
-              width="25rem"
-              height="25rem"
-              src="mastodon.svg"
-            />
-            <a rel="me" href="https://social.lol/@francesco">Mastodon</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              alt="Blog icon"
-              width="25rem"
-              height="25rem"
-              src="blog.svg"
-            />
-            <a href="http://dev.to/menghif">Blog</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              alt="LinkedIn icon"
-              width="25rem"
-              height="25rem"
-              src="linkedin.svg"
-            />
-            <a href="http://linkedin.com/in/menghif">LinkedIn</a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-    <!-- proven.lol/cd97f8 -->
+          ))
+      }
+    </ul>
   </main>
-</Layout>
+</BaseLayout>
 
-<style is:global>
-  body {
-    color: var(--color-text);
-    background-color: var(--color-background);
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  a {
-    color: #8ecae6;
-  }
-  a:hover {
-    text-decoration: none;
-  }
+<style>
   h1 {
-    font-size: 60px;
-    line-height: 1;
-  }
-  h2 {
-    font-size: 30px;
-  }
-  h1,
-  h2 {
-    font-weight: 400;
-    margin: 0;
-  }
-  .content-wrap {
-    max-width: 800px;
-    width: 85%;
-    margin: 0 auto;
-    padding: 60px 0;
-  }
-  h3 {
+    margin-top: 0.5rem;
     margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+    background: -webkit-linear-gradient(var(--text2), var(--text1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+
+  .latest-posts {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  .introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
   .subtitle {
+    margin: 0;
     opacity: 80%;
+    font-size: 1.4rem;
     font-style: italic;
-  }
-  .divider > section {
-    border-bottom: 1px dashed var(--color-text);
-    padding: 25px 0;
-  }
-  .divider > section:last-of-type {
-    border-bottom: none;
-  }
-
-  #profile-picture {
-    animation: 0.5s ease-out 0s 1 slideInTopImage;
-
-    margin-bottom: 1rem;
-    border-radius: 50%;
-    filter: drop-shadow(0.1rem 0.1rem 0.1rem #2e2e2e);
-  }
-
-  header {
-    animation: 0.5s ease-out 0s 1 slideInTop;
-    background-image: linear-gradient(
-      0deg,
-      hsl(200deg 95% 14%) 0%,
-      hsl(200deg 100% 13%) 7%,
-      hsl(201deg 100% 13%) 13%,
-      hsl(202deg 100% 12%) 19%,
-      hsl(203deg 100% 11%) 25%,
-      hsl(204deg 100% 11%) 30%,
-      hsl(205deg 100% 10%) 36%,
-      hsl(207deg 100% 9%) 42%,
-      hsl(208deg 100% 9%) 48%,
-      hsl(211deg 100% 8%) 55%,
-      hsl(214deg 100% 7%) 63%,
-      hsl(220deg 100% 7%) 73%,
-      hsl(0deg 0% 0%) 93%
-    );
-    color: #f7fff7;
+    font-weight: 500;
   }
 
   .description {
-    opacity: 80%;
+    opacity: 90%;
   }
 
-  .logos {
-    width: 1.5rem;
-  }
-
-  /* Projects --------------------------------------*/
-  .projects {
-    background: var(--color-background);
-  }
-
-  .project-info {
+  #profile-picture {
     margin: 1rem;
+    border-radius: 20%;
   }
 
-  .project-item {
-    overflow: hidden;
-  }
-  .project-item h3 {
-    margin-top: 0;
-  }
-
-  /* Contact Info ---------------------------------*/
-  footer {
-    background: var(--color-footer);
-    color: #f7fff7;
-  }
-  .contact-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  .contact-list li {
-    padding: 1rem;
-  }
-  .contact-list img {
-    vertical-align: text-bottom;
-  }
-
-  .contact-list a {
-    font-size: 1.2rem;
-    margin-left: 0.5rem;
-    display: inline-block;
-    text-align: center;
-  }
-
-  .icon {
-  }
-
-  /* Responsive ----------------------------------*/
-  @media screen and (min-width: 750px) {
-    header,
-    footer {
-      text-align: center;
-    }
-    .left-image {
-      float: left;
-      margin-right: 20px;
-    }
-
-    .right-image {
-      float: right;
-      margin-left: 20px;
-    }
-
-    .contact-list {
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    h1 {
-      font-size: 60px;
-      line-height: 0.9;
-      margin-bottom: 20px;
-    }
-    h2 {
-      line-height: 1;
-    }
-    .contact-list li {
-      padding: 0.7rem;
+  @media screen and (max-width: 700px) {
+    .latest-posts {
+      flex-direction: column;
     }
   }
 </style>

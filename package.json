@@ -16,7 +16,7 @@
     "@fontsource-variable/montserrat": "^5.0.19",
     "@fontsource/pt-serif-caption": "^5.0.13",
     "astro": "^4.7.1",
-    "astro-expressive-code": "^0.35.2",
+    "astro-expressive-code": "^0.35.3",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.0"
   },

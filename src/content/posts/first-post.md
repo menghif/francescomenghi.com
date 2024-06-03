@@ -6,11 +6,11 @@ author: "Francesco Menghi"
 tags: ["astro", "blogging", "accessibility"]
 ---
 
-Hi, my name is Francesco and welcome to my new personal blog! I will use this space going forward to post about my learnings as a developer and things that I find interesting. You can learn more about me here.
+Hi, my name is Francesco and welcome to my new personal blog! I will use this space going forward to post about my learnings as a developer and things that I find interesting. You can learn more about me [here](/about).
 
 When I was in school, I blogged using the [DEV](https://dev.to/menghif) platform. It was a great way to get started quickly as I needed a way to write about my school projects without worrying about the actual blogging platform. Since then, I tinkered with the idea of building a new personal website with a blog, but I never did until now.
 
-When building a new blog, it’s hard to decide when you are actually “done” as you often feel like something could be improved or a new feature could be added. I decided to publish this website now and make further improvements as I find fit. If I were a startup of one person, this would be my minimum viable product ([MVP](https://en.wikipedia.org/wiki/Minimum_viable_product)).
+When building a new blog, it’s hard to decide when you are actually “done” as you often feel like something could be improved or a new feature could be added. I decided to publish this website now and make further improvements as I go. If I were a one person startup, this would be my minimum viable product ([MVP](https://en.wikipedia.org/wiki/Minimum_viable_product)).
 
 Let's look at how I built this website.
 

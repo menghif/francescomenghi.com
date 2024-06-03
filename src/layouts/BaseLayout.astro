@@ -14,6 +14,7 @@ const { pageTitle, description } = Astro.props;
     <meta name="description" content={description} />
     <title>{pageTitle}</title>
     <ViewTransitions />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"
       type="application/rss+xml"

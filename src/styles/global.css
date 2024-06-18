@@ -61,7 +61,8 @@ body {
   font-size: 1.125rem;
   color: var(--text1);
   transition: font-size 250ms ease;
-  font-family: "Montserrat Variable", sans-serif;
+  font-family: sans-serif;
+  font-family: "Inter Variable", sans-serif;
 }
 
 #body-content {

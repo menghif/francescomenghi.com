@@ -11,17 +11,16 @@
     "lint": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\""
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.5",
-    "@astrojs/sitemap": "^3.1.5",
-    "@fontsource-variable/montserrat": "^5.0.19",
-    "@fontsource/pt-serif-caption": "^5.0.13",
-    "astro": "^4.7.1",
-    "astro-expressive-code": "^0.35.2",
+    "@astrojs/rss": "^4.0.6",
+    "@astrojs/sitemap": "^3.1.6",
+    "@fontsource-variable/inter": "^5.0.18",
+    "astro": "^4.10.3",
+    "astro-expressive-code": "^0.35.3",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.12.1"
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.12.3"
   }
 }

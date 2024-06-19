@@ -17,6 +17,7 @@
     "astro": "^4.10.3",
     "astro-expressive-code": "^0.35.3",
     "markdown-it": "^14.1.0",
+    "node-html-parser": "^6.1.13",
     "sanitize-html": "^2.13.0"
   },
   "devDependencies": {

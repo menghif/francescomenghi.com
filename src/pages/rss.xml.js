@@ -59,7 +59,6 @@ export async function GET(context) {
     feed.push({
       title: post.data.title,
       description: post.data.description,
-      author: `${post.data.author.email} (${post.data.author.name})`,
       pubDate: post.data.pubDate,
       categories: post.data.tags,
       link: `/posts/${post.slug}`,
@@ -68,9 +67,9 @@ export async function GET(context) {
   }
 
   return rss({
-    title: "Francesco Menghi | Blog",
+    title: "Francesco Menghi",
     description:
-      "My personal blog where I write about experiences and learnings in my software developer journey",
+      "My personal blog where I write about experiences and learnings in my software developer journey.",
     site: context.site,
     trailingSlash: false,
     items: feed,

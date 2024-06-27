@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
 const allPosts = await getCollection("posts");
 const me = "Francesco Menghi";
-const description = "The personal website of Francesco Menghi";
+const description = `The personal website of ${me}`;
 ---
 
 <BaseLayout pageTitle={me} description={description}>

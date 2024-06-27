@@ -26,7 +26,7 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout pageTitle={tag}>
+<BaseLayout pageTitle={`${tag} | Francesco Menghi`}>
   <div>
     <h1>
       Tag: <a transition:name={tag} class="tag" href="/tags">{tag}</a>

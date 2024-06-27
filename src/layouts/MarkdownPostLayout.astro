@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={`${frontmatter.title} | Francesco Menghi`}>
   <div>
     <h1>
       {frontmatter.title}

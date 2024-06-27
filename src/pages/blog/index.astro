@@ -8,7 +8,7 @@ const allPosts = await getCollection("posts");
 const pageTitle = "Blog";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={`${pageTitle} | Francesco Menghi`}>
   <h1>
     {pageTitle}
     <a href={`${Astro.site}rss.xml`} aria-label="RSS Link"><RssIcon /></a>

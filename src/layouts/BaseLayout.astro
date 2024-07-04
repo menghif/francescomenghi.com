@@ -5,6 +5,7 @@ import { ViewTransitions } from "astro:transitions";
 import "@fontsource-variable/inter";
 import "../styles/global.css";
 const { pageTitle, description } = Astro.props;
+const me = "Francesco Menghi";
 ---
 
 <html lang="en">
@@ -13,13 +14,15 @@ const { pageTitle, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <title>{pageTitle}</title>
+    <title>
+      {Astro.url.pathname === "/" ? pageTitle : `${pageTitle} | ${me}`}
+    </title>
     <ViewTransitions />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Francesco Menghi's Blog"
+      title=`${me}'s Blog`
       href={`${Astro.site}rss.xml`}
     />
   </head>

@@ -1,4 +1,15 @@
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,720,20,1.2,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
 :root {
+  --step--2: clamp(0.7901rem, 0.7278rem + 0.3117vi, 0.8681rem);
+  --step--1: clamp(0.8889rem, 0.7667rem + 0.6111vi, 1.0417rem);
+  --step-0: clamp(1rem, 0.8rem + 1vi, 1.25rem);
+  --step-1: clamp(1.125rem, 0.825rem + 1.5vi, 1.5rem);
+  --step-2: clamp(1.2656rem, 0.8381rem + 2.1375vi, 1.8rem);
+  --step-3: clamp(1.4238rem, 0.8349rem + 2.9447vi, 2.16rem);
+  --step-4: clamp(1.6018rem, 0.8097rem + 3.9608vi, 2.592rem);
+  --step-5: clamp(1.802rem, 0.7553rem + 5.2335vi, 3.1104rem);
+
   /* main color */
   --hue: 182;
   --saturation: 42%;
@@ -58,7 +69,7 @@ body {
   margin: 0;
   padding: 1rem;
   line-height: 1.65;
-  font-size: 1.125rem;
+  font-size: var(--step-0);
   color: var(--text1);
   transition: font-size 250ms ease;
   font-family: sans-serif;
@@ -68,7 +79,7 @@ body {
 #body-content {
   margin: 0 auto;
   width: 100%;
-  max-width: 45rem;
+  max-width: 48rem;
 }
 
 #content {
@@ -80,14 +91,19 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: var(--step-5);
   margin: 1rem 0;
   font-weight: bold;
 }
 
 h2 {
+  font-size: var(--step-3);
   color: var(--text2);
   margin: 0.5rem 0;
+}
+
+h3 {
+  font-size: var(--step-2);
 }
 
 svg {
@@ -242,10 +258,6 @@ blockquote p {
 }
 
 @media screen and (min-width: 700px) {
-  body {
-    font-size: 1.25rem;
-  }
-
   code {
     font-size: 1rem;
   }

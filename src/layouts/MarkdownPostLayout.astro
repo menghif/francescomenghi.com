@@ -6,26 +6,30 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout pageTitle={frontmatter.title}>
   <div>
-    <h1>
-      {frontmatter.title}
-    </h1>
-    <p>{frontmatter.pubDate.toString().slice(4, 15)}</p>
-    <p>
-      <em>{frontmatter.description}</em>
-    </p>
-    <p>Written by: <a class="author" href="/about">{frontmatter.author}</a></p>
+    <div class="post-info">
+      <h1>
+        {frontmatter.title}
+      </h1>
+      <p>{frontmatter.pubDate.toString().slice(4, 15)}</p>
+      <p>
+        <em>{frontmatter.description}</em>
+      </p>
+      <p>
+        Written by: <a class="author" href="/about">{frontmatter.author}</a>
+      </p>
 
-    {
-      frontmatter.image && (
-        <Image
-          class="image"
-          width={720}
-          src={frontmatter.cover}
-          alt={frontmatter.coverAlt}
-          loading="eager"
-        />
-      )
-    }
+      {
+        frontmatter.image && (
+          <Image
+            class="image"
+            width={720}
+            src={frontmatter.cover}
+            alt={frontmatter.coverAlt}
+            loading="eager"
+          />
+        )
+      }
+    </div>
     <slot />
 
     <div class="tags">
@@ -41,6 +45,9 @@ const { frontmatter } = Astro.props;
 </BaseLayout>
 
 <style>
+  .post-info {
+    margin-bottom: 3rem;
+  }
   .author {
     color: var(--text2);
   }

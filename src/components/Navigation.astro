@@ -1,26 +1,40 @@
+---
+const currentPage = Astro.url.pathname.split("/")[1];
+const pages = [
+  { title: "About", url: "/about" },
+  { title: "Projects", url: "/projects" },
+  { title: "Blog", url: "/blog" },
+];
+---
+
 <div class="nav-links">
-  <a id="home" href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/projects">Projects</a>
-  <a href="/blog">Blog</a>
+  {
+    pages.map((page) => (
+      <a
+        href={page.url}
+        class={currentPage === page.url.split("/")[1] ? "active" : ""}
+      >
+        {page.title}
+      </a>
+    ))
+  }
 </div>
 
 <style is:global>
   .nav-links {
-    width: 100%;
-    display: none;
-    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .nav-links a {
-    display: block;
-    text-align: center;
-    padding: 0.5rem 0.6rem;
-    border-radius: 0.9rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.6rem;
     text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 14rem;
+    font-weight: 500;
+  }
+
+  .active {
+    background-color: var(--surface4);
   }
 </style>

@@ -180,7 +180,7 @@ a:hover .icon-fill {
   border: dotted 1px var(--text2);
   border-radius: 0.8rem;
   padding: 0.5rem 1rem;
-  font-size: 1.125rem;
+  font-size: var(--step-0);
   background-color: var(--surface3);
 }
 

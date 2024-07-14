@@ -119,24 +119,6 @@ a {
   text-decoration-color: var(--brand);
 }
 
-.expanded {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transform: translateY(0);
-    transition:
-      transform 250ms ease-in,
-      opacity 250ms ease-in;
-  }
-
-  @starting-style {
-    transform: translateY(-0.75rem);
-    opacity: 0;
-  }
-}
-
 img {
   margin-block: 0.5rem;
   max-width: 100%;
@@ -228,6 +210,7 @@ blockquote {
   margin: 1.5rem 0;
   padding: 0.5rem 1rem;
 }
+
 blockquote:before {
   font-family: "PT Serif Caption", serif;
   color: var(--text2);
@@ -237,11 +220,9 @@ blockquote:before {
   margin-right: 0.5rem;
   vertical-align: -1.5rem;
 }
+
 blockquote p {
   display: inline;
-}
-
-@media screen and (min-width: 550px) {
 }
 
 @media screen and (min-width: 700px) {
@@ -252,22 +233,5 @@ blockquote p {
   .contact-list {
     display: flex;
     justify-content: space-between;
-  }
-}
-
-/* Always show navigation links when Javascript is disabled */
-@media (scripting: none) {
-  .nav-links {
-    display: block;
-    width: auto;
-  }
-
-  .nav-links a {
-    display: inline-block;
-    width: inherit;
-  }
-
-  #hamburger {
-    display: none;
   }
 }

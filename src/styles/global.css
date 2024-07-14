@@ -82,7 +82,7 @@ body {
   max-width: 48rem;
 }
 
-#content {
+main {
   padding-top: 1rem;
 }
 
@@ -117,24 +117,6 @@ a {
   color: var(--text4);
   text-underline-offset: 0.25rem;
   text-decoration-color: var(--brand);
-}
-
-.expanded {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transform: translateY(0);
-    transition:
-      transform 250ms ease-in,
-      opacity 250ms ease-in;
-  }
-
-  @starting-style {
-    transform: translateY(-0.75rem);
-    opacity: 0;
-  }
 }
 
 img {
@@ -228,6 +210,7 @@ blockquote {
   margin: 1.5rem 0;
   padding: 0.5rem 1rem;
 }
+
 blockquote:before {
   font-family: "PT Serif Caption", serif;
   color: var(--text2);
@@ -237,28 +220,9 @@ blockquote:before {
   margin-right: 0.5rem;
   vertical-align: -1.5rem;
 }
+
 blockquote p {
   display: inline;
-}
-
-@media screen and (min-width: 550px) {
-  #hamburger {
-    display: none;
-  }
-
-  .nav-links {
-    display: block;
-    position: static;
-    width: auto;
-    background: none;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-links a {
-    display: inline-block;
-    width: inherit;
-  }
 }
 
 @media screen and (min-width: 700px) {
@@ -269,22 +233,5 @@ blockquote p {
   .contact-list {
     display: flex;
     justify-content: space-between;
-  }
-}
-
-/* Always show navigation links when Javascript is disabled */
-@media (scripting: none) {
-  .nav-links {
-    display: block;
-    width: auto;
-  }
-
-  .nav-links a {
-    display: inline-block;
-    width: inherit;
-  }
-
-  #hamburger {
-    display: none;
   }
 }

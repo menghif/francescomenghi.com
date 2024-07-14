@@ -8,7 +8,7 @@ const { pageTitle, description } = Astro.props;
 const me = "Francesco Menghi";
 ---
 
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -28,12 +28,12 @@ const me = "Francesco Menghi";
     />
   </head>
   <body>
-    <a class="skip-nav" href="#content">Skip navigation</a>
+    <a class="skip-nav" href="#main">Skip navigation</a>
     <div id="body-content">
       <Header />
-      <div id="content">
+      <main id="main" transition:animate="fade">
         <slot />
-      </div>
+      </main>
       <Footer />
     </div>
   </body>

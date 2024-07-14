@@ -1,15 +1,36 @@
 ---
+import { Image } from "astro:assets";
+import profilePic from "../assets/profile-pic.jpeg";
 import Navigation from "./Navigation.astro";
-import Hamburger from "./Hamburger.astro";
 import ThemeIcon from "./icons/ThemeIcon.astro";
+const currentPath = Astro.url.pathname;
 ---
 
 <header>
   <nav>
-    <Navigation />
-    <div class="icons">
+    {
+      currentPath === "/" ? (
+        <div />
+      ) : (
+        <a id="home" href="/">
+          <Image
+            class="profile-pic"
+            height={35}
+            width={35}
+            densities={[4]}
+            id="profile-picture"
+            src={profilePic}
+            alt={`Portrait of Francesco`}
+            loading="eager"
+          />
+          <span class="name">Francesco</span>
+        </a>
+      )
+    }
+
+    <div class="right-side">
+      <Navigation />
       <ThemeIcon />
-      <Hamburger />
     </div>
   </nav>
 </header>
@@ -29,23 +50,54 @@ import ThemeIcon from "./icons/ThemeIcon.astro";
     margin-bottom: 0.1rem;
   }
 
-  .icons {
+  .right-side {
+    min-height: 3.75rem;
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   nav {
     display: flex;
-    flex-direction: column-reverse;
-    padding-bottom: 0.3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
-  @media screen and (min-width: 550px) {
+  #home {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.6rem;
+    font-weight: 600;
+  }
+
+  .name {
+    display: none;
+    margin: 0.6rem 0.3rem;
+    background: -webkit-linear-gradient(var(--text2), var(--text1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .profile-pic {
+    margin: 0.6rem;
+    border-radius: 50%;
+    /* outline: 0.125rem solid var(--text2); */
+  }
+
+  @media screen and (min-width: 450px) {
     nav {
-      display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
+    }
+
+    #home {
+      justify-content: center;
+    }
+
+    .name {
+      display: block;
     }
   }
 </style>

@@ -4,6 +4,8 @@ import BlogPost from "../../components/BlogPost.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RssIcon from "../../components/icons/RssIcon.astro";
 import TagIcon from "../../components/icons/TagIcon.astro";
+import DevToLogo from "../../components/icons/DevToLogo.astro";
+import ArrowUpRight from "../../components/icons/ArrowUpRight.astro";
 const allPosts = await getCollection("posts");
 const pageTitle = "Blog";
 ---
@@ -23,8 +25,11 @@ const pageTitle = "Blog";
         />
       ))
     }
-  </ul>
 
+    <a class="old-blog-link" href="https://dev.to/menghif">
+      <DevToLogo />Old blog posts <ArrowUpRight class="arrow-up" /></a
+    >
+  </ul>
   <a class="tags-link" href="/tags"><TagIcon />Tags</a>
 </BaseLayout>
 
@@ -43,5 +48,17 @@ const pageTitle = "Blog";
     padding-top: 0.6rem;
     align-items: center;
     font-size: 0.1rem;
+  }
+
+  .old-blog-link {
+    font-size: 1.25rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .old-blog-link:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
   }
 </style>

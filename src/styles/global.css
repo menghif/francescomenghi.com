@@ -39,7 +39,7 @@ html.dark {
   --surface1: hsl(var(--hue) 10% 10%);
   --surface2: hsl(var(--hue) 10% 15%);
   --surface3: hsl(var(--hue) 5% 20%);
-  --surface4: hsl(var(--hue) 5% 25%);
+  --surface4: hsl(var(--hue) 5% 20%);
   --surface-shadow: var(--hue) 50% 3%;
   --shadow-strength: 0.2;
 }
@@ -88,6 +88,13 @@ main {
 
 * {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
 }
 
 h1 {

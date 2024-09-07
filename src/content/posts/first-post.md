@@ -2,6 +2,8 @@
 title: "First Post"
 pubDate: 2024-05-27
 description: "A look at how I made my new blog."
+cover: "./images/astro-arc.webp"
+coverAlt: "Astro teal wallpaper"
 author: "Francesco Menghi"
 tags: ["astro", "blogging", "accessibility"]
 ---

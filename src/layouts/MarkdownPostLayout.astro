@@ -1,35 +1,46 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { Image } from "astro:assets";
+import Calendar from "../components/icons/calendar-dots.astro";
+import TextAlignLeft from "../components/icons/text-align-left.astro";
+import User from "../components/icons/user.astro";
 const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
   <div>
+    <h1>
+      {frontmatter.title}
+    </h1>
     <div class="post-info">
-      <h1>
-        {frontmatter.title}
-      </h1>
-      <p>{frontmatter.pubDate.toString().slice(4, 15)}</p>
-      <p>
-        <em>{frontmatter.description}</em>
-      </p>
-      <p>
-        Written by: <a class="author" href="/about">{frontmatter.author}</a>
-      </p>
-
-      {
-        frontmatter.image && (
-          <Image
-            class="image"
-            width={720}
-            src={frontmatter.cover}
-            alt={frontmatter.coverAlt}
-            loading="eager"
-          />
-        )
-      }
+      <div class="info-line">
+        <Calendar />
+        <p>{frontmatter.pubDate.toString().slice(4, 15)}</p>
+      </div>
+      <div class="info-line">
+        <TextAlignLeft />
+        <p>
+          <em>{frontmatter.description}</em>
+        </p>
+      </div>
+      <div class="info-line">
+        <User />
+        <p>
+          Written by: <a class="author" href="/about">{frontmatter.author}</a>
+        </p>
+      </div>
     </div>
+    {
+      frontmatter.cover && (
+        <Image
+          class="image"
+          width={1440}
+          src={frontmatter.cover}
+          alt={frontmatter.coverAlt}
+          loading="eager"
+        />
+      )
+    }
     <slot />
 
     <div class="tags">
@@ -45,14 +56,28 @@ const { frontmatter } = Astro.props;
 </BaseLayout>
 
 <style>
-  .post-info {
-    margin-bottom: 3rem;
+  p {
+    margin: 0.5rem 0;
   }
+  .info-line {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .post-info {
+    margin-bottom: 2rem;
+    background-color: var(--surface4);
+    border-radius: 0.6rem;
+    padding: 0.25rem 1rem;
+  }
+
   .author {
     color: var(--text2);
   }
 
   .image {
+    margin: 0;
     border-radius: 0.6rem;
   }
 

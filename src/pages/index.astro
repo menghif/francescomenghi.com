@@ -4,6 +4,7 @@ import profilePic from "../assets/profile-pic.jpeg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
+import LanguagesLogos from "../components/LanguagesLogos.astro";
 const allPosts = await getCollection("posts");
 const me = "Francesco Menghi";
 const description = `The personal website of ${me}`;
@@ -23,8 +24,8 @@ const description = `The personal website of ${me}`;
       />
       <h1>{me}</h1>
       <h2 class="subtitle">Software Developer</h2>
+      <LanguagesLogos />
     </div>
-    <p></p>
     <p class="description">
       Ciao! 👋 I'm Francesco, I'm a software developer interested in all things
       Web Development and Open Source.
@@ -50,7 +51,6 @@ const description = `The personal website of ${me}`;
 <style>
   h1 {
     font-size: 2.4rem;
-    margin-top: 0.5rem;
     margin-bottom: 0;
     text-align: center;
     font-weight: bold;
@@ -69,6 +69,7 @@ const description = `The personal website of ${me}`;
 
   .introduction {
     display: flex;
+    gap: 0.5rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;

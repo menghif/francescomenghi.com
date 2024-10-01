@@ -6,7 +6,7 @@ description: "About Francesco Menghi"
 
 Hello there! I’m Francesco and this is my personal website.
 
-I am a software developer based in Toronto Canada 🇨🇦. I am originally from Italy 🇮🇹 and also lived in France 🇫🇷 for a number of years. I am interested in Web Development and working in Open Source.
+I am a software developer based in Toronto Canada. I am originally from Italy and also lived in France for a number of years. I am interested in Web Development and working in Open Source.
 
 Before switching paths and becoming a software developer, I previously worked in the finance sector after obtaining a university degree in economics. In 2020, I went back to school to learn how to code and it was one of the best decisions I have made!
 
@@ -22,7 +22,9 @@ My interest in Open Source started when I was a student working on [Telescope](h
 
 Among others, these are the skills I am currently focused on:
 
-- HTML
-- CSS
 - Javascript
+- CSS
+- HTML
 - React
+- Astro
+- Node.js

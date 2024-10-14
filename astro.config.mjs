@@ -11,4 +11,7 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  image: {
+    service: passthroughImageService(),
+  },
 });

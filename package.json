@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\""
+    "lint": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\"",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.7",

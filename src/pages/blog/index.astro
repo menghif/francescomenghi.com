@@ -17,13 +17,15 @@ const pageTitle = "Blog";
   </h1>
   <ul>
     {
-      allPosts.map((post) => (
-        <BlogPost
-          url={`/blog/${post.slug}`}
-          title={post.data.title}
-          pubDate={post.data.pubDate}
-        />
-      ))
+      allPosts
+        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+        .map((post) => (
+          <BlogPost
+            url={`/blog/${post.slug}`}
+            title={post.data.title}
+            pubDate={post.data.pubDate}
+          />
+        ))
     }
 
     <a class="old-blog-link" href="https://dev.to/menghif">

@@ -34,6 +34,7 @@ const description = `The personal website of ${me}`;
     <ul class="latest-posts">
       {
         allPosts
+          .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
           .slice(0, 3)
           .map((post) => (
             <BlogPost

@@ -1,4 +1,5 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
+
 import expressiveCode from "astro-expressive-code";
 import sitemap from "@astrojs/sitemap";
 

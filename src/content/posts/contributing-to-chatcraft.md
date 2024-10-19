@@ -50,7 +50,8 @@ const currentMonth =
   todayDate.getMonth() === chat.date.getMonth();
 
 const isToday = currentMonth && todayDate.getDate() === chat.date.getDate();
-const isYesterday = currentMonth && todayDate.getDate() - 1 === chat.date.getDate();
+const isYesterday =
+  currentMonth && todayDate.getDate() - 1 === chat.date.getDate();
 ```
 
 I used [ternary](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator) operators to handle the logic in the react component like this:

@@ -71,7 +71,6 @@ body {
   line-height: 1.65;
   font-size: var(--step-0);
   color: var(--text1);
-  transition: font-size 250ms ease;
   font-family: sans-serif;
   font-family: "Inter Variable", sans-serif;
 }
@@ -171,14 +170,12 @@ a:hover .icon-fill {
   background-color: var(--surface4);
   color: var(--text1);
   transform: translateY(-140%);
-  transition: transform 200ms ease-out;
   padding: 0.8rem;
   border-radius: 0 0 0.9rem 0.9rem;
 }
 
 .skip-nav:focus {
   transform: translateY(-40%);
-  transition: transform 200ms ease-in;
 }
 
 .tag {

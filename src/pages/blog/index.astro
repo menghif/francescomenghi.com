@@ -28,9 +28,11 @@ const pageTitle = "Blog";
         ))
     }
 
-    <a class="old-blog-link" href="https://dev.to/menghif">
-      <DevToLogo />Old blog posts <ArrowUpRight class="arrow-up" /></a
-    >
+    <li>
+      <a class="old-blog-link" href="https://dev.to/menghif">
+        <DevToLogo />Old blog posts <ArrowUpRight class="arrow-up" /></a
+      >
+    </li>
   </ul>
   <a class="tags-link" href="/tags"><TagIcon />Tags</a>
 </BaseLayout>
@@ -38,6 +40,7 @@ const pageTitle = "Blog";
 <style>
   ul {
     padding: 0.1rem 0;
+    list-style-type: none;
   }
 
   h1 {

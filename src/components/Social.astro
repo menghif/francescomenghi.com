@@ -3,17 +3,17 @@ const { platform, link } = Astro.props;
 ---
 
 <li>
-  <!-- verfied badge for Mastodon rel="me" -->
   {
+    // verified badge for Mastodon profile: rel="me"
     platform === "Mastodon" ? (
-      <a rel="me" class="social-link" href={link}>
-        <slot class="icon" />
-        <span class="text">{platform}</span>
+      <a rel="me" href={link}>
+        <slot />
+        <span>{platform}</span>
       </a>
     ) : (
       <a href={link}>
-        <slot class="icon" />
-        <span class="text">{platform}</span>
+        <slot />
+        <span>{platform}</span>
       </a>
     )
   }

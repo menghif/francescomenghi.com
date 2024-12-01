@@ -23,8 +23,9 @@ My interest in Open Source started when I was a student working on [Telescope](h
 Among others, these are the skills I am currently focused on:
 
 - Javascript
-- CSS
+- Typescript
 - HTML
+- CSS
 - React
 - Astro
 - Node.js

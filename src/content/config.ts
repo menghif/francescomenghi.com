@@ -10,11 +10,7 @@ const postsCollection = defineCollection({
       pubDate: z.date(),
       description: z.string(),
       author: z.string(),
-      cover: image()
-        .refine((img) => img.width >= 720, {
-          message: "Cover image must be at least 720 pixels wide!",
-        })
-        .optional(),
+      cover: image().optional(),
       coverAlt: z.string().optional(),
       tags: z.array(z.string()),
     }),

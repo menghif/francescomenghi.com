@@ -1,7 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 const { pageTitle, description } = Astro.props;
 const me = "Francesco Menghi";
@@ -17,7 +17,7 @@ const me = "Francesco Menghi";
     <title>
       {Astro.url.pathname === "/" ? pageTitle : `${pageTitle} | ${me}`}
     </title>
-    <ViewTransitions fallback="none" />
+    <ClientRouter fallback="none" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"

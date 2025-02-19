@@ -20,7 +20,7 @@ const pages = [
   }
 </div>
 
-<style is:global>
+<style>
   .nav-links {
     display: flex;
     flex-wrap: wrap;
@@ -36,5 +36,9 @@ const pages = [
 
   .active {
     background-color: var(--surface4);
+  }
+
+  .nav-links > :not(.active) {
+    opacity: 80%;
   }
 </style>

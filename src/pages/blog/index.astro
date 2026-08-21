@@ -21,7 +21,7 @@ const pageTitle = "Blog";
         .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
         .map((post) => (
           <BlogPost
-            url={`/blog/${post.slug}`}
+            url={`/blog/${post.id}`}
             title={post.data.title}
             pubDate={post.data.pubDate}
           />

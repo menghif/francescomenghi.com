@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+
+const { title, body, image, imageAlt, href, tags = [] } = Astro.props;
+---
+
+<li class="work-card smooth-shadow">
+  <a href={href}>
+    <Image
+      src={image}
+      width={220}
+      densities={[2]}
+      alt={imageAlt}
+      loading="lazy"
+    />
+  </a>
+  <div class="work-card-info">
+    <h3><a href={href}>{title}</a></h3>
+    <p>{body}</p>
+    <div class="tags">
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</li>
+
+<style>
+  .work-card {
+    list-style: none;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background-color: var(--surface3);
+  }
+
+  .work-card img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+
+  .work-card h3 {
+    margin: 1rem 0 0.25rem 0;
+  }
+
+  .work-card h3 a {
+    text-decoration: none;
+  }
+
+  .work-card h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+  }
+
+  .work-card p {
+    margin: 0.25rem 0 0.75rem 0;
+  }
+
+  .work-card .tags {
+    margin: 0;
+  }
+
+  .work-card .tag {
+    padding: 0.25rem 0.65rem;
+    font-size: var(--step--2);
+  }
+</style>

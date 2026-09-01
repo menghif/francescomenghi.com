@@ -1,12 +1,20 @@
 ---
-const { url, title, pubDate, featured } = Astro.props;
+const { url, title, pubDate, featured, hideDate, description } = Astro.props;
 ---
 
 <li class:list={[{ box: featured }, { "smooth-shadow": featured }]}>
   <p>
-    <a href={url} class="post">{title}</a> ·
-    <span class="date"> {pubDate.toString().slice(4, 15)}</span>
+    <a href={url} class="post">{title}</a>
+    {
+      !hideDate && (
+        <>
+          {" "}
+          · <span class="date">{pubDate.toString().slice(4, 15)}</span>
+        </>
+      )
+    }
   </p>
+  {description && <p class="description">{description}</p>}
 </li>
 
 <style>
@@ -34,6 +42,12 @@ const { url, title, pubDate, featured } = Astro.props;
     font-size: 85%;
     font-style: italic;
     color: var(--text2);
+  }
+
+  .description {
+    margin-top: 0;
+    color: var(--text2);
+    font-size: 0.95rem;
   }
 
   .box {

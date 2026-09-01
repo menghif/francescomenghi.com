@@ -4,7 +4,10 @@ import profilePic from "../assets/profile-pic.jpeg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import BlogPost from "../components/BlogPost.astro";
-import LanguagesLogos from "../components/LanguagesLogos.astro";
+import WorkCard from "../components/WorkCard.astro";
+import nycRestaurantsScreenshot from "../assets/nyc-restaurant-app.png";
+import staticDodo from "../assets/static-dodo-npmjs.png";
+import bikeShareMap from "../assets/bike-share-app.png";
 const allPosts = await getCollection("posts");
 const me = "Francesco Menghi";
 const description = `The personal website of ${me}`;
@@ -23,13 +26,91 @@ const description = `The personal website of ${me}`;
         loading="eager"
       />
       <h1>{me}</h1>
-      <h2 class="subtitle">Software Developer</h2>
-      <LanguagesLogos />
+      <p class="subtitle">Software Developer · Toronto, Canada</p>
+
+      <p class="description">
+        Full-stack software developer with 4+ years of experience building
+        object-oriented applications and modern JavaScript/React web
+        applications. Experienced in owning CI/CD pipelines and collaborating
+        cross-functionally, with a track record of quickly picking up new tools
+        and frameworks. I work in TypeScript, React and Node through open source
+        and side projects.
+      </p>
     </div>
-    <p class="description">
-      Ciao! 👋 I'm Francesco, I'm a software developer interested in all things
-      Web Development and Open Source.
-    </p>
+
+    <h2>Experience</h2>
+    <article class="job">
+      <div class="job-header">
+        <h3>Product Programmer</h3>
+        <p class="job-meta">
+          <b
+            ><a
+              href="https://www.teknion.com"
+              target="_blank"
+              rel="noopener noreferrer">Teknion</a
+            ></b
+          > · <time datetime="2022-09">Sept 2022</time> - Present
+        </p>
+      </div>
+      <p>
+        I write the logic that governs how Teknion products can be configured
+        and assembled, so that every layout a designer builds is valid by
+        construction. It's used by internal design and sales teams, and by
+        external dealers placing Teknion furniture in their own floor plans.
+      </p>
+      <ul>
+        <li>
+          I helped build the first Teknion product line extension to work across
+          multiple catalogues, targeting a shared parent class and handling each
+          catalogue's edge cases separately. Later product lines reused the
+          pattern.
+        </li>
+        <li>
+          I built and currently maintain a GitLab CI/CD pipeline (PowerShell,
+          with a runner on an internal server) that runs a build on every merge
+          request for a team of 10. It replaced builds run locally before
+          merging, where inconsistent CET versions allowed breakage tied to a
+          specific version to reach the main branch.
+        </li>
+      </ul>
+      <p>
+        The work is done in Configura CM, a statically typed, garbage collected
+        OOP language, in a large production codebase with code review, git
+        workflows and a regular release cycle.
+      </p>
+    </article>
+
+    <div class="section-header">
+      <h2>Selected Work</h2>
+      <a class="view-all" href="/projects">View all projects →</a>
+    </div>
+    <ul class="work-grid">
+      <WorkCard
+        title="React App"
+        body="Restaurant finder for NYC, built with React, MongoDB Atlas, and Leaflet maps."
+        image={nycRestaurantsScreenshot}
+        imageAlt="React restaurant app screenshot"
+        href="https://restaurants-app.menghi.me"
+        tags={["React", "MongoDB", "Leaflet"]}
+      />
+      <WorkCard
+        title="Static Site Generator"
+        body="CLI tool that converts Markdown/text files into HTML pages, published to npm."
+        image={staticDodo}
+        imageAlt="Static Dodo Npmjs webpage screenshot"
+        href="https://www.npmjs.com/package/static-dodo"
+        tags={["Node.js", "CLI"]}
+      />
+      <WorkCard
+        title="Bike Share Map"
+        body="Live Bike Share Toronto data on a map, with geolocation to find nearby bikes."
+        image={bikeShareMap}
+        imageAlt="Bike Share Map screenshot"
+        href="https://bikeshare.menghi.me"
+        tags={["JavaScript", "Geolocation API"]}
+      />
+    </ul>
+
     <h2>Latest Posts</h2>
     <ul class="latest-posts">
       {
@@ -39,9 +120,10 @@ const description = `The personal website of ${me}`;
           .map((post) => (
             <BlogPost
               featured
+              hideDate
               url={`/blog/${post.id}`}
               title={post.data.title}
-              pubDate={post.data.pubDate}
+              description={post.data.description}
             />
           ))
       }
@@ -83,6 +165,7 @@ const description = `The personal website of ${me}`;
     font-size: 1.4rem;
     font-style: italic;
     font-weight: 500;
+    text-align: center;
   }
 
   .description {
@@ -93,9 +176,79 @@ const description = `The personal website of ${me}`;
     border-radius: 20%;
   }
 
+  .hero-actions {
+    margin: 0.5rem 0 1.5rem 0;
+  }
+
+  .job {
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--surface3);
+    margin-top: 1rem;
+  }
+
+  .job-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .job h3 {
+    margin: 0;
+  }
+
+  .job-meta {
+    margin: 0;
+    color: var(--text2);
+    font-style: italic;
+  }
+
+  .section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .section-header h2 {
+    margin-bottom: 0;
+  }
+
+  .view-all {
+    text-decoration: none;
+    font-size: var(--step--1);
+  }
+
+  .view-all:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 2rem 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media screen and (max-width: 700px) {
     .latest-posts {
       flex-direction: column;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

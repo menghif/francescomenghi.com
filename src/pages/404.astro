@@ -4,28 +4,95 @@ const title = "404";
 ---
 
 <BaseLayout pageTitle={title}>
-  <div class="content">
-    <h1>{title}</h1>
-    <p>Page Not Found! 👀</p>
+  <div class="not-found">
+    <div class="not-found-mark">
+      <span class="not-found-squircle" aria-hidden="true"></span>
+      <h1>404</h1>
+    </div>
+    <p>This page took a wrong turn and never made it here.</p>
+    <a class="home-link" href="/">Take me home</a>
   </div>
 </BaseLayout>
 
 <style>
-  h1 {
-    font-size: 10rem;
-    font-style: italic;
-    margin-bottom: 0;
-    color: var(--text2);
-  }
-
-  p {
-    font-size: 1.8rem;
-    margin-top: 0;
-  }
-
-  .content {
+  .not-found {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    padding: 2rem 0 3rem;
+  }
+
+  .not-found-mark {
+    position: relative;
+    display: inline-block;
+  }
+
+  .not-found-squircle {
+    position: absolute;
+    top: -0.5rem;
+    right: -1.75rem;
+    z-index: 0;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 20%;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hue) 80% 72%),
+      hsl(var(--hue) 80% 46%)
+    );
+    box-shadow:
+      0.35rem 0.5rem 0.5rem -0.25rem hsl(var(--surface-shadow) / 0.35),
+      0.15rem 0.2rem 1.25rem hsl(var(--surface-shadow) / 0.25);
+    transform: rotate(-10deg);
+    animation: not-found-float 6s ease-in-out infinite;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 1;
+    font-size: 8rem;
+    font-style: italic;
+    margin: 0;
+    color: var(--text1);
+  }
+
+  p {
+    max-width: 24rem;
+    font-size: 1.2rem;
+    color: var(--text2);
+    margin: 1.5rem 0 2rem;
+  }
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.8rem;
+    background-color: var(--brand);
+    color: hsl(var(--hue) 20% 97%);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .home-link:hover {
+    text-decoration: none;
+    opacity: 0.88;
+  }
+
+  @keyframes not-found-float {
+    0%,
+    100% {
+      transform: rotate(-10deg) translateY(0);
+    }
+    50% {
+      transform: rotate(-4deg) translateY(-0.4rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-squircle {
+      animation: none;
+    }
   }
 </style>

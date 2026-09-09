@@ -16,15 +16,21 @@ const description = `The personal website of ${me}`;
 <BaseLayout pageTitle={me} description={description}>
   <main>
     <div class="introduction">
-      <Image
-        class="smooth-shadow"
-        height={200}
-        densities={[3]}
-        id="profile-picture"
-        src={profilePic}
-        alt={`Portrait of ${me}`}
-        loading="eager"
-      />
+      <div class="profile-wrap">
+        <span class="profile-squircle profile-squircle--one" aria-hidden="true"
+        ></span>
+        <span class="profile-squircle profile-squircle--two" aria-hidden="true"
+        ></span>
+        <Image
+          class="smooth-shadow"
+          height={200}
+          densities={[3]}
+          id="profile-picture"
+          src={profilePic}
+          alt={`Portrait of ${me}`}
+          loading="eager"
+        />
+      </div>
       <h1>{me}</h1>
       <p class="subtitle">Software Developer · Toronto, Canada</p>
 
@@ -111,7 +117,10 @@ const description = `The personal website of ${me}`;
       />
     </ul>
 
-    <h2>Latest Posts</h2>
+    <div class="section-header">
+      <h2>Latest Posts</h2>
+      <a class="view-all" href="/blog">View all posts →</a>
+    </div>
     <ul class="latest-posts">
       {
         allPosts
@@ -172,8 +181,53 @@ const description = `The personal website of ${me}`;
     opacity: 90%;
   }
 
+  .profile-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+
   #profile-picture {
+    position: relative;
+    z-index: 1;
     border-radius: 20%;
+  }
+
+  .profile-squircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: 12.5rem;
+    height: 12.5rem;
+    border-radius: 20%;
+    pointer-events: none;
+    box-shadow:
+      0.35rem 0.5rem 0.5rem -0.25rem hsl(var(--surface-shadow) / 0.35),
+      0.15rem 0.2rem 1.25rem hsl(var(--surface-shadow) / 0.25);
+  }
+
+  .profile-squircle--one {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hue) 20% 64%),
+      hsl(var(--hue) 20% 38%)
+    );
+    transform: translate(-46%, -50%) rotate(4deg);
+  }
+
+  .profile-squircle--two {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hue) 80% 74%),
+      hsl(var(--hue) 80% 46%)
+    );
+    transform: translate(-48%, -50%) rotate(2deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .profile-squircle {
+      transition: none;
+    }
   }
 
   .hero-actions {
@@ -224,7 +278,7 @@ const description = `The personal website of ${me}`;
 
   .view-all:hover {
     text-decoration: underline;
-    text-decoration-color: var(--brand);
+    text-decoration-color: var(--link);
   }
 
   .work-grid {

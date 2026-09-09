@@ -12,7 +12,7 @@ const pageTitle = "Projects";
   <div>
     <h1>{pageTitle}</h1>
 
-    <div class="content-wrap divider">
+    <div class="project-list">
       <Project
         title="React App"
         type="App"
@@ -21,6 +21,7 @@ const pageTitle = "Projects";
         imageAlt="React restaurant app screenshot"
         appLink="https://restaurants-app.menghi.me"
         codeLink="https://github.com/menghif/restaurants-app"
+        tags={["React", "MongoDB", "Leaflet"]}
       />
       <Project
         title="Static Site Generator"
@@ -30,6 +31,7 @@ const pageTitle = "Projects";
         imageAlt="Static Dodo Npmjs webpage screenshot"
         appLink="https://www.npmjs.com/package/static-dodo"
         codeLink="https://github.com/menghif/static-dodo"
+        tags={["Node.js", "CLI"]}
       />
       <Project
         title="Bike Share Map"
@@ -39,6 +41,7 @@ const pageTitle = "Projects";
         imageAlt="Bike Share Map screenshot"
         appLink="https://bikeshare.menghi.me"
         codeLink="https://github.com/menghif/bike-toronto"
+        tags={["JavaScript", "Geolocation API"]}
       />
       <Project
         title="Grocery Store Frontend"
@@ -48,28 +51,8 @@ const pageTitle = "Projects";
         imageAlt="Grocery store frontend screenshot"
         appLink="https://grocery-store.menghi.me"
         codeLink="https://github.com/menghif/grocery-store-frontend"
+        tags={["HTML", "CSS", "JavaScript"]}
       />
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .project-info {
-    margin: 1rem;
-  }
-
-  .project-item {
-    overflow: hidden;
-  }
-  .project-item h3 {
-    margin-top: 0;
-  }
-
-  .divider > section {
-    border-bottom: 1px dashed var(--color-text);
-    padding: 25px 0;
-  }
-  .divider > section:last-of-type {
-    border-bottom: none;
-  }
-</style>

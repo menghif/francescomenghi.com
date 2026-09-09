@@ -1,7 +1,16 @@
 ---
 import { Image } from "astro:assets";
 
-const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
+const {
+  title,
+  type,
+  body,
+  image,
+  imageAlt,
+  appLink,
+  codeLink,
+  tags = [],
+} = Astro.props;
 ---
 
 <section class="project-item smooth-shadow">
@@ -19,11 +28,16 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
   <div class="project-info">
     <h2>{title}</h2>
     <p>{body}</p>
-    {
-      /* prettier-ignore */
-      appLink && <a class="link" href={appLink}>View {type}</a>
-    }
-    <a class="link" href={codeLink}> Source Code</a>
+    <div class="tags">
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+    <div class="links">
+      {
+        /* prettier-ignore */
+        appLink && <a class="link" href={appLink}>View {type}</a>
+      }
+      <a class="link" href={codeLink}>Source Code</a>
+    </div>
   </div>
 </section>
 
@@ -37,27 +51,34 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     gap: 2rem;
     margin: 2rem 0;
     padding: 2rem;
-    border-radius: 1.2vw;
+    border-radius: 1rem;
     background-color: var(--surface3);
   }
 
   .screenshot {
     flex: 2;
-
-    transition: 300ms ease all;
-    &:hover {
-      cursor: pointer;
-      transform: perspective(600px) rotateY(6deg) scale(1.05);
-      filter: blur(0);
-      opacity: 1;
-    }
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+
+  .screenshot:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+  }
+
+  .screenshot a {
+    display: block;
+  }
+
   .project-info {
     flex: 3;
   }
 
   img {
+    display: block;
     width: 20rem;
+    border-radius: 0.5rem;
     object-fit: cover;
   }
 
@@ -65,13 +86,33 @@ const { title, type, body, image, imageAlt, appLink, codeLink } = Astro.props;
     margin-top: 0;
   }
 
-  .link {
-    margin-right: 0.5rem;
+  .tags {
+    margin: 0.75rem 0 1.25rem 0;
+  }
+
+  .tags .tag {
+    padding: 0.25rem 0.65rem;
+    font-size: var(--step--2);
+  }
+
+  .links {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screenshot {
+      transition: none;
+    }
   }
 
   @media screen and (max-width: 600px) {
     .project-item {
       display: block;
+    }
+
+    img {
+      width: 100%;
     }
   }
 </style>

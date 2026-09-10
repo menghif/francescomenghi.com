@@ -2,7 +2,13 @@
 const { url, title, pubDate, featured, hideDate, description } = Astro.props;
 ---
 
-<li class:list={[{ box: featured }, { "smooth-shadow": featured }]}>
+<li
+  class:list={[
+    { box: featured },
+    { "smooth-shadow": featured },
+    { "scroll-reveal": featured },
+  ]}
+>
   <p>
     <a href={url} class="post">{title}</a>
     {

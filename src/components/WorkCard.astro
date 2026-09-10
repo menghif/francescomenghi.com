@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 const { title, body, image, imageAlt, href, tags = [] } = Astro.props;
 ---
 
-<li class="work-card smooth-shadow">
+<li class="work-card smooth-shadow scroll-reveal">
   <a href={href}>
     <Image
       src={image}

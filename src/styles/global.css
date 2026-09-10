@@ -4,7 +4,7 @@
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
   font-weight: 100 900;
   src: url("@fontsource-variable/inter/files/inter-latin-standard-normal.woff2")
     format("woff2-variations");
@@ -18,7 +18,7 @@
 @font-face {
   font-family: "Inter";
   font-style: italic;
-  font-display: swap;
+  font-display: optional;
   font-weight: 100 900;
   src: url("@fontsource-variable/inter/files/inter-latin-standard-italic.woff2")
     format("woff2-variations");
@@ -49,6 +49,7 @@
 }
 
 html {
+  /* scroll-behavior: auto; */
   color-scheme: light;
   --brand: hsl(var(--hue) var(--saturation) var(--lightness));
   --link: var(--brand);
@@ -93,6 +94,50 @@ html.dark {
     0 41.8px 33.4px
       hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 0.03)),
     0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+}
+
+/* reveals cards as they scroll into view; no-op in browsers without
+   scroll-driven animations, since the fallback state is fully visible */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .scroll-reveal {
+      animation-name: reveal-up;
+      animation-duration: 20ms;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view();
+      animation-range: entry 0% cover 15%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main > * {
+    animation: reveal-up 300ms ease-out both;
+  }
+
+  main > *:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  main > *:nth-child(2) {
+    animation-delay: 60ms;
+  }
+  main > *:nth-child(3) {
+    animation-delay: 120ms;
+  }
+  main > *:nth-child(4) {
+    animation-delay: 180ms;
+  }
+  main > *:nth-child(5) {
+    animation-delay: 240ms;
+  }
 }
 
 body {

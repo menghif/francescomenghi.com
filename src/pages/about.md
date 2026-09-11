@@ -14,6 +14,10 @@ Before switching paths and becoming a software developer, I previously worked in
 
 I currently work as a software developer at [Teknion](https://www.teknion.com/ca), where I focus on the Teknion extension for the [Configura](https://www.configura.com) CET Commercial Interiors application.
 
+I write the logic that governs how Teknion products can be configured and assembled, so that every layout a designer builds is valid by construction. It's used by internal design and sales teams, and by external dealers placing Teknion furniture in their own floor plans.
+
+The work is done in [CM](https://dev-docs.configura.com/cm-language), a statically typed, garbage-collected OOP language, in a large production codebase with code review, Git workflows and a regular release cycle.
+
 ## Web Dev and Open Source
 
 My interest in Open Source started when I was a student working on [Telescope](https://github.com/Seneca-CDOT/telescope): a blogging aggregator web app built using a React frontend and micro-services as backend. Today, I like to find and contribute to Open Source projects and stay up to date with the constantly evolving web development space.

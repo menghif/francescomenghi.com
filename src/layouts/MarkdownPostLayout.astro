@@ -41,7 +41,9 @@ const { frontmatter } = Astro.props;
         />
       )
     }
-    <slot />
+    <div class="post-content prose-serif">
+      <slot />
+    </div>
 
     <div class="tags">
       {

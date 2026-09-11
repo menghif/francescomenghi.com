@@ -51,8 +51,10 @@ export async function GET(context) {
       allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
     });
 
-    if (post.data.image) {
-      const coverImageHtml = `<img src="${post.data.image.url}" alt="${post.data.image.alt}" />`;
+    if (post.data.cover) {
+      const optimizedCover = await getImage({ src: post.data.cover });
+      const coverSrc = context.site + optimizedCover.src.replace("/", "");
+      const coverImageHtml = `<img src="${coverSrc}" alt="${post.data.coverAlt ?? ""}" />`;
       contentHtml = `${coverImageHtml}\n${contentHtml}`;
     }
 

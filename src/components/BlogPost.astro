@@ -1,4 +1,13 @@
 ---
+interface Props {
+  url: string;
+  title: string;
+  pubDate?: Date;
+  featured?: boolean;
+  hideDate?: boolean;
+  description?: string;
+}
+
 const { url, title, pubDate, featured, hideDate, description } = Astro.props;
 ---
 
@@ -12,7 +21,7 @@ const { url, title, pubDate, featured, hideDate, description } = Astro.props;
   <p>
     <a href={url} class="post">{title}</a>
     {
-      !hideDate && (
+      !hideDate && pubDate && (
         <>
           {" "}
           · <span class="date">{pubDate.toString().slice(4, 15)}</span>

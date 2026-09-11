@@ -124,8 +124,10 @@ const fillTransition = "350ms";
 
     if (!isDark) {
       // add fill transition to sun svg
-      const sun = document.querySelector(".sun") as SVGPathElement;
-      sun.style.transition = `fill ${sun.dataset.transition}`;
+      const sun = document.querySelector<SVGPathElement>(".sun");
+      if (sun) {
+        sun.style.transition = `fill ${sun.dataset.transition}`;
+      }
     }
   };
 

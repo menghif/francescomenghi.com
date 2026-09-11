@@ -1,5 +1,17 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  type: string;
+  body: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  appLink?: string;
+  codeLink: string;
+  tags?: string[];
+}
 
 const {
   title,

@@ -33,4 +33,4 @@ There is no test suite configured in this repo.
 ## Conventions
 
 - Astro + `eslint-plugin-astro` (recommended + jsx-a11y-recommended rules) and Prettier (with `prettier-plugin-astro`) are both configured — run `pnpm lint` and `pnpm format` before considering frontend changes done.
-- TypeScript config extends `astro/tsconfigs/base` with `strictNullChecks` and `allowJs` enabled.
+- TypeScript config extends `astro/tsconfigs/strict` (implies `astro/tsconfigs/base`, `allowJs`, and full `strict` mode including `noImplicitAny`). Components taking props must declare an `interface Props`.

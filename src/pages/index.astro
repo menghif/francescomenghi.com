@@ -2,13 +2,13 @@
 import { Image } from "astro:assets";
 import profilePic from "../assets/profile-pic.jpeg";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getPosts } from "../lib/posts";
 import BlogPost from "../components/BlogPost.astro";
 import WorkCard from "../components/WorkCard.astro";
 import nycRestaurantsScreenshot from "../assets/nyc-restaurant-app.png";
 import staticDodo from "../assets/static-dodo-npmjs.png";
 import bikeShareMap from "../assets/bike-share-app.png";
-const allPosts = await getCollection("posts");
+const allPosts = await getPosts();
 const me = "Francesco Menghi";
 const description = `The personal website of ${me}`;
 ---
@@ -120,15 +120,14 @@ const description = `The personal website of ${me}`;
     <ul class="latest-posts">
       {
         allPosts
-          .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
           .slice(0, 3)
           .map((post) => (
             <BlogPost
               featured
               hideDate
-              url={`/blog/${post.id}`}
-              title={post.data.title}
-              description={post.data.description}
+              url={`/blog/${post.slug}`}
+              title={post.title}
+              description={post.description}
             />
           ))
       }

@@ -1,12 +1,12 @@
 ---
-import { getCollection } from "astro:content";
+import { getPosts } from "../../lib/posts";
 import BlogPost from "../../components/BlogPost.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RssIcon from "../../components/icons/RssIcon.astro";
 import TagIcon from "../../components/icons/TagIcon.astro";
 import DevToLogo from "../../components/icons/DevToLogo.astro";
 import ArrowUpRight from "../../components/icons/ArrowUpRight.astro";
-const allPosts = await getCollection("posts");
+const allPosts = await getPosts();
 const pageTitle = "Blog";
 ---
 
@@ -17,15 +17,13 @@ const pageTitle = "Blog";
   </h1>
   <ul>
     {
-      allPosts
-        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-        .map((post) => (
-          <BlogPost
-            url={`/blog/${post.id}`}
-            title={post.data.title}
-            pubDate={post.data.pubDate}
-          />
-        ))
+      allPosts.map((post) => (
+        <BlogPost
+          url={`/blog/${post.slug}`}
+          title={post.title}
+          pubDate={post.pubDate}
+        />
+      ))
     }
 
     <li>

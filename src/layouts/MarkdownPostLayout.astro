@@ -1,13 +1,12 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
-import { Image } from "astro:assets";
+import type { Post } from "../lib/posts";
 import Calendar from "../components/icons/CalendarDots.astro";
 import TextAlignLeft from "../components/icons/TextAlignLeft.astro";
 import User from "../components/icons/UserIcon.astro";
 
 interface Props {
-  frontmatter: CollectionEntry<"posts">["data"];
+  frontmatter: Post;
 }
 
 const { frontmatter } = Astro.props;
@@ -38,11 +37,11 @@ const { frontmatter } = Astro.props;
     </div>
     {
       frontmatter.cover && (
-        <Image
+        <img
           class="image"
           width={1440}
-          src={frontmatter.cover}
-          alt={frontmatter.coverAlt ?? null}
+          src={frontmatter.cover.src}
+          alt={frontmatter.cover.alt}
           loading="eager"
         />
       )
@@ -54,8 +53,8 @@ const { frontmatter } = Astro.props;
     <div class="tags">
       {
         frontmatter.tags.map((tag) => (
-          <a class="tag" href={`/tags/${tag}`}>
-            {tag}
+          <a class="tag" href={`/tags/${tag.slug}`}>
+            {tag.label}
           </a>
         ))
       }

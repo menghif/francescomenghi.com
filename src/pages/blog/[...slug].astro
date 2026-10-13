@@ -1,19 +1,20 @@
 ---
-import { getCollection, render } from "astro:content";
+import { PortableText } from "emdash/ui";
+import PostCode from "../../components/PostCode.astro";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
+import { getPost } from "../../lib/posts";
 
-export async function getStaticPaths() {
-  const blogEntries = await getCollection("posts");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+const { slug } = Astro.params;
+const post = slug ? await getPost(slug) : undefined;
+
+if (!post) {
+  return Astro.rewrite("/404");
 }
-
-const { entry } = Astro.props;
-const { Content } = await render(entry);
 ---
 
-<MarkdownPostLayout frontmatter={entry.data}>
-  <Content />
+<MarkdownPostLayout frontmatter={post}>
+  <PortableText
+    value={post.content}
+    components={{ type: { code: PostCode } }}
+  />
 </MarkdownPostLayout>

@@ -1,0 +1,2433 @@
+{
+  "posts": [
+    {
+      "slug": "upgrading-eslint",
+      "title": "Upgrading ESLint",
+      "pubDate": "2024-10-14T12:00:00.000Z",
+      "description": "My experience upgrading the Chatcraft project to ESLint version 9.",
+      "author": "Francesco Menghi",
+      "cover": {
+        "src": "/images/posts/eslint-cover.jpg",
+        "alt": "ESLint logo"
+      },
+      "tags": [
+        {
+          "slug": "eslint",
+          "label": "ESLint"
+        },
+        {
+          "slug": "javascript-tools",
+          "label": "JavaScript Tools"
+        },
+        {
+          "slug": "linting",
+          "label": "linting"
+        }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "_key": "k7q",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7m",
+              "text": "The JavaScript ecosystem is full of useful tools, and some of them are standard practice in every project. One such tool is ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7o",
+              "text": "ESLint",
+              "marks": [
+                "k7n"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7p",
+              "text": ", a “linter” that helps catch errors in your code and can be extended with various plugins.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k7n",
+              "href": "https://eslint.org"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k7s",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7r",
+              "text": "For the last few years, the ESLint maintainers have been transitioning to a completely new configuration setup. Now that version 8 is no longer maintained, it’s time for everyone to switch to the new “flat config.”",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k80",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7t",
+              "text": "I won’t explain all the differences of the new configuration here. There’s a great ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7v",
+              "text": "post",
+              "marks": [
+                "k7u"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7w",
+              "text": " from the ESLint project that explains all the changes, and there’s also a complete ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7y",
+              "text": "migration guide",
+              "marks": [
+                "k7x"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7z",
+              "text": " in the documentation.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k7u",
+              "href": "https://eslint.org/blog/2022/08/new-config-system-part-2/"
+            },
+            {
+              "_type": "link",
+              "_key": "k7x",
+              "href": "https://eslint.org/docs/latest/use/migrate-to-9.0.0"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k82",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k81",
+              "text": "Upgrading experience",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k87",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k83",
+              "text": "In this post, I want to share my experience upgrading to the flat config for the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k85",
+              "text": "Chatcraft",
+              "marks": [
+                "k84"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k86",
+              "text": " project.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k84",
+              "href": "https://github.com/tarasglek/chatcraft.org"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k8c",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k88",
+              "text": "I initially found the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8a",
+              "text": "ESLint Configuration Migrator",
+              "marks": [
+                "k89"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8b",
+              "text": " package from the documentation and thought the whole process would just involve running one script:",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k89",
+              "href": "https://www.npmjs.com/package/@eslint/migrate-config"
+            }
+          ]
+        },
+        {
+          "_type": "code",
+          "_key": "k8d",
+          "code": "npx @eslint/migrate-config .eslintrc.json",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k8l",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k8e",
+              "text": "I was wrong... The script did create a new ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8f",
+              "text": "eslint.config.mjs",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8g",
+              "text": " file with the proper structure, but it also added a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8h",
+              "text": "FlatCompat",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8i",
+              "text": " utility and other Node.js functions like ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8j",
+              "text": "fileURLToPath",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8k",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k8m",
+          "code": "// ... more imports above\nimport { fileURLToPath } from \"node:url\";\nimport js from \"@eslint/js\";\nimport { FlatCompat } from \"@eslint/eslintrc\";\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = path.dirname(__filename);\nconst compat = new FlatCompat({\n  baseDirectory: __dirname,\n  recommendedConfig: js.configs.recommended,\n  allConfig: js.configs.all,\n});\n\nexport default [\n  ...fixupConfigRules(\n    compat.extends(\n      \"eslint:recommended\",\n      \"plugin:@typescript-eslint/recommended\",\n      \"plugin:react/recommended\",\n      \"plugin:jsx-a11y/recommended\",\n      \"plugin:react-hooks/recommended\",\n      \"eslint-config-prettier\",\n    ),\n  ),\n  {\n    plugins: {\n      \"@typescript-eslint\": fixupPluginRules(typescriptEslint),\n      react: fixupPluginRules(react),\n      \"react-hooks\": fixupPluginRules(reactHooks),\n      \"jsx-a11y\": fixupPluginRules(jsxA11Y),\n      prettier,\n    },\n  },\n\n  // ... more code below\n];",
+          "language": "js"
+        },
+        {
+          "_type": "block",
+          "_key": "k8o",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k8n",
+              "text": "All these added functions are needed to properly use ESLint plugins that are not yet supported by the new flat config. However, after doing some research, I realized that most popular ESLint plugins have already been updated, and they provide instructions for their recommended setup.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k8v",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k8p",
+              "text": "I went through each plugin and added the recommended configuration. The only plugin not working was ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8q",
+              "text": "eslint-plugin-react-hooks",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8r",
+              "text": ", but luckily, after digging through the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8t",
+              "text": "React repository",
+              "marks": [
+                "k8s"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8u",
+              "text": ", I found that the latest RC version is now compatible with the new ESLint flat config!",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k8s",
+              "href": "https://github.com/facebook/react/issues/28313#issuecomment-2363692765"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k8z",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k8w",
+              "text": "In the end, I was able to remove ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k8x",
+              "text": "fileURLToPath",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k8y",
+              "text": " and the Node.js functions to get a much simpler config:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k90",
+          "code": "export default [\n  eslint.configs.recommended,\n  ...tsEslint.configs.recommended,\n  reactPlugin.configs.flat.recommended,\n  reactPlugin.configs.flat[\"jsx-runtime\"],\n  jsxA11y.flatConfigs.recommended,\n  eslintPluginPrettier,\n\n  // ... more code below\n];",
+          "language": "js"
+        },
+        {
+          "_type": "block",
+          "_key": "k95",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k91",
+              "text": "Here’s the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k93",
+              "text": "pull request",
+              "marks": [
+                "k92"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k94",
+              "text": " with all the changes, including fixes for multiple ESLint errors.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k92",
+              "href": "https://github.com/tarasglek/chatcraft.org/pull/697"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k97",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k96",
+              "text": "Learnings",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k99",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k98",
+              "text": "Upgrading ESLint to the latest major version taught me more about the tool itself. I spent a lot of time reading the docs and learning what each specific linting rule is used for.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k9b",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k9a",
+              "text": "The biggest takeaway, however, was that it’s worth taking the time to really understand what’s going on in the config file instead of simply running a script and calling it a day.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ]
+    },
+    {
+      "slug": "manage-node-versions-with-pnpm",
+      "title": "Manage Node versions with pnpm",
+      "pubDate": "2024-12-02T12:00:00.000Z",
+      "description": "pnpm is not only the best package manager, it can also easily manage Node versions.",
+      "author": "Francesco Menghi",
+      "tags": [
+        {
+          "slug": "pnpm",
+          "label": "pnpm"
+        },
+        {
+          "slug": "javascript-tools",
+          "label": "JavaScript Tools"
+        }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "_key": "k5b",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k51",
+              "text": "When it comes to managing different Node versions for your projects, there are several tools to do it, such as ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k52",
+              "text": "nvm",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k53",
+              "text": ", ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k54",
+              "text": "n",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k55",
+              "text": ", or ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k56",
+              "text": "fnm",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k57",
+              "text": ", but if you use ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k59",
+              "text": "pnpm",
+              "marks": [
+                "k58"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k5a",
+              "text": " as your package manager, you probably don’t need any of those!",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k58",
+              "href": "https://pnpm.io"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k5d",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5c",
+              "text": "Pnpm is a package manager that has become very popular over the years thanks to its faster install times and more efficient use of disk space compared to npm or yarn. Its core philosophy revolves around creating a single store for all dependencies, avoiding duplication, and ensuring that every package version is used only once across all projects.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k5h",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5e",
+              "text": "Something less known is that pnpm can also handle Node version management through its ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k5f",
+              "text": "pnpm env",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k5g",
+              "text": " command. In this blog post, we'll explore how to use pnpm to manage and quickly switch Node versions within your development environment.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k5j",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5i",
+              "text": "Getting Started with pnpm",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k5l",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5k",
+              "text": "To use pnpm for managing Node versions, you first need to install pnpm globally on your system with the standalone script:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k5m",
+          "code": "curl -fsSL https://get.pnpm.io/install.sh | sh -",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k5o",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5n",
+              "text": "You can now install the LTS version of Node like this:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k5p",
+          "code": "pnpm env use --global lts",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k5t",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5q",
+              "text": "You can verify that the Long Term Support (LTS) version of Node was successfully installed with the command ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k5r",
+              "text": "node -v",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k5s",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k5v",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5u",
+              "text": "How to manage Node versions with pnpm",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k5x",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5w",
+              "text": "Let’s say you just cloned a project from GitHub that only works with Node 18 and you have version 22 installed. Downloading and switching to Node 18 is as easy as running:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k5y",
+          "code": "pnpm env use --global 18",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k62",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5z",
+              "text": "Once this version of Node is installed, ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k60",
+              "text": "pnpm",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k61",
+              "text": " will automatically switch your environment to use it.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k64",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k63",
+              "text": "You can also list all of the downloaded versions of Node on your machine:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k65",
+          "code": "pnpm env list",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k6b",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k66",
+              "text": "If you want to download a Node version and not switch to it directly, you can use ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k67",
+              "text": "add",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k68",
+              "text": " instead of ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k69",
+              "text": "use",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k6a",
+              "text": ":",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k6c",
+          "code": "pnpm env add --global 19.1.0",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k6e",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6d",
+              "text": "Finally, to remove a version you don’t need anymore, you can simply run:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k6f",
+          "code": "pnpm env remove --global 19.1.0",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k6h",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6g",
+              "text": "Set a specific Node version per project",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k6l",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6i",
+              "text": "If you have a project that requires a specific version of Node and you don't want to change your global Node, you can define the version in a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k6j",
+              "text": ".npmrc",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k6k",
+              "text": " file at the root of you project:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k6m",
+          "code": "use-node-version = 20.0.0",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k6o",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6n",
+              "text": "This way whenever you use pnpm in that project you will always be using Node 20 without having to manually change to it.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k6q",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6p",
+              "text": "Bonus feature: manage your pnpm versions",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k6s",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6r",
+              "text": "Pnpm also includes a way to manage versions of itself on a per-project basis.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k6w",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6t",
+              "text": "If your project needs an old version of pnpm, you can define it in its ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k6u",
+              "text": "package.json",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k6v",
+              "text": " file like this:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k6x",
+          "code": "{\n  \"packageManager\": \"pnpm@8.15.9\"\n}",
+          "language": "js"
+        },
+        {
+          "_type": "block",
+          "_key": "k71",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k6y",
+              "text": "You also need to turn on the option to manage package manager versions by adding one line to ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k6z",
+              "text": ".npmrc",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k70",
+              "text": " in your home folder (This will be on by default starting with pnpm 10):",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k72",
+          "code": "manage-package-manager-versions = true",
+          "language": "sh"
+        },
+        {
+          "_type": "block",
+          "_key": "k78",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k73",
+              "text": "Now when you run ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k74",
+              "text": "pnpm install",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k75",
+              "text": " in a project, pnpm will download and use the specific version defined in ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k76",
+              "text": "package.json",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k77",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k7b",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k79",
+              "text": "Note",
+              "marks": [
+                "em"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7a",
+              "text": ": Node also has a way to manage package managers (both pnpm and yarn) with Corepack. If another developer has pnpm installed via Corepack, the “packageManager” field will be used by Corepack to switch between versions the same way.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k7d",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7c",
+              "text": "Conclusion",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k7l",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7e",
+              "text": "Using ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7f",
+              "text": "pnpm",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7g",
+              "text": " to manage Node versions is a great way to streamline your development environment. With the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7h",
+              "text": "pnpm env",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7i",
+              "text": " you can install, switch, and manage multiple Node versions with ease. If you're already using ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k7j",
+              "text": "pnpm",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k7k",
+              "text": " as your package manager, it is worth giving it a try!",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ]
+    },
+    {
+      "slug": "first-post",
+      "title": "First Post",
+      "pubDate": "2024-05-27T12:00:00.000Z",
+      "description": "A look at how I made my new blog.",
+      "author": "Francesco Menghi",
+      "cover": {
+        "src": "/images/posts/astro-arc.webp",
+        "alt": "Astro teal wallpaper"
+      },
+      "tags": [
+        {
+          "slug": "astro",
+          "label": "astro"
+        },
+        {
+          "slug": "blogging",
+          "label": "blogging"
+        },
+        {
+          "slug": "accessibility",
+          "label": "accessibility"
+        }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "_key": "k2k",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2g",
+              "text": "Hi, my name is Francesco and welcome to my new personal blog! I will use this space going forward to post about my learnings as a developer and things that I find interesting. You can learn more about me ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k2i",
+              "text": "here",
+              "marks": [
+                "k2h"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k2j",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k2h",
+              "href": "/about"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k2p",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2l",
+              "text": "When I was in school, I blogged using the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k2n",
+              "text": "DEV",
+              "marks": [
+                "k2m"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k2o",
+              "text": " platform. It was a great way to get started quickly as I needed a way to write about my school projects without worrying about the actual blogging platform. Since then, I tinkered with the idea of building a new personal website with a blog, but I never did until now.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k2m",
+              "href": "https://dev.to/menghif"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k2u",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2q",
+              "text": "When building a new blog, it’s hard to decide when you are actually “done” as you often feel like something could be improved or a new feature could be added. I decided to publish this website now and make further improvements as I go. If I were a one person startup, this would be my minimum viable product (",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k2s",
+              "text": "MVP",
+              "marks": [
+                "k2r"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k2t",
+              "text": ").",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k2r",
+              "href": "https://en.wikipedia.org/wiki/Minimum_viable_product"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k2w",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2v",
+              "text": "Let's look at how I built this website.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k2y",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2x",
+              "text": "Building with Astro",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k36",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2z",
+              "text": "I've been following the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k31",
+              "text": "Astro",
+              "marks": [
+                "k30"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k32",
+              "text": " project for a while and when it came time to build my own website, I knew I wanted to use it. Astro is a fantastic framework for building static sites, and it includes everything needed out of the box. For example, it comes with ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k34",
+              "text": "Vite",
+              "marks": [
+                "k33"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k35",
+              "text": " which is a frontend tool that provides a fast server for development.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k30",
+              "href": "https://astro.build"
+            },
+            {
+              "_type": "link",
+              "_key": "k33",
+              "href": "https://vitejs.dev"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k38",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k37",
+              "text": "Some things I really like about Astro:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k3a",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k39",
+              "text": "It has great documentation and a fantastic tutorial for anyone that is starting out.",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "k3c",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3b",
+              "text": "I can simply write a new post using Markdown, and it will automatically create HTML pages for each post.",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "k3e",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3d",
+              "text": "I can divide my code into components that I can reuse across my website, and it allows me to organize my codebase in a straightforward way.",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "k3g",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3f",
+              "text": "It provides support for frontend frameworks in an Island architecture. For example, if I ever need to use React for an interactive UI, I can add it to part of my website.",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "k3l",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3h",
+              "text": "The Astro template syntax is very interesting. It has a lot of the same ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3j",
+              "text": "JSX",
+              "marks": [
+                "k3i"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3k",
+              "text": " functionality as React, but it’s also easy to pick up for non-react developers since it’s just a superset of HTML. Having used JSX extensively before, I felt right at home.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k3i",
+              "href": "https://react.dev/learn/writing-markup-with-jsx"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k3r",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3m",
+              "text": "An Astro component comes with a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3n",
+              "text": ".astro",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3o",
+              "text": " file extension and this is what a basic component that returns a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3p",
+              "text": "div",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3q",
+              "text": " looks like:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k3s",
+          "code": "---\nconst name = \"Francesco\";\n---\n\n<div>\n  <h1>Hello {name}!</h1>\n</div>\n\n<style>\n  h1 {\n    font-size: 2rem;\n  }\n</style>",
+          "language": "astro"
+        },
+        {
+          "_type": "block",
+          "_key": "k40",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k3t",
+              "text": "Anything inside the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3u",
+              "text": "---",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3v",
+              "text": " notation (similar to ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3w",
+              "text": "frontmatter",
+              "marks": [
+                "em"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3x",
+              "text": " in Markdown files) is JavaScript that gets executed during the build process. This allows you to modify the page at build time without sending any JavaScript to the browser. Additionally, you can include JavaScript to run in the browser by using a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k3y",
+              "text": "<script> </script>",
+              "marks": [
+                "code"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3z",
+              "text": " tag within the same Astro file.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k42",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k41",
+              "text": "Some tools I used",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k44",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k43",
+              "text": "I wanted my website to be extremely fast and properly accessible. The theme of accessibility on the web is something that I have been reading a lot about recently and I wanted to start this website on solid foundations.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k46",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k45",
+              "text": "I used two different tools to make sure the basics of good web accessibility and performance are met.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k48",
+          "style": "h3",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k47",
+              "text": "Lighthouse",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4d",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k49",
+              "text": "The first one is probably well known by most web developers, it is Google ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k4b",
+              "text": "Lighthouse",
+              "marks": [
+                "k4a"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k4c",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k4a",
+              "href": "https://developer.chrome.com/docs/lighthouse/overview"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k4f",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4e",
+              "text": "Lighthouse lets you test your website to find many potential issues related to Performance, Accessibility, Best Practices and others. It is accessible from the Chrome Developer Tools.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4h",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4g",
+              "text": "After you run a test, you get a total score and a list of issues. The issues usually come with links with the relevant documentation. I find this to be a really great tool, and I’ve been using it for many years.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4j",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4i",
+              "text": "These are my Lighthouse results:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "image",
+          "_key": "k4k",
+          "asset": {
+            "_ref": "static-lighthouse-results.png",
+            "url": "/images/posts/lighthouse-results.png"
+          },
+          "alt": "Lighthouse results showing 100 across each category"
+        },
+        {
+          "_type": "block",
+          "_key": "k4m",
+          "style": "h3",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4l",
+              "text": "Astro Dev Toolbar",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4r",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4n",
+              "text": "This second tool is specific to Astro and came out last year with the introduction of the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k4p",
+              "text": "4.0",
+              "marks": [
+                "k4o"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k4q",
+              "text": " release. When you run a dev server, a little toolbar shows up at the bottom with some tools (extendible with third party integrations!) including one to help with Performance and Accessibility.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k4o",
+              "href": "https://astro.build/blog/astro-4/#the-astro-dev-toolbar"
+            }
+          ]
+        },
+        {
+          "_type": "image",
+          "_key": "k4s",
+          "asset": {
+            "_ref": "static-astro-dev-toolbar.png",
+            "url": "/images/posts/astro-dev-toolbar.png"
+          },
+          "alt": "Astro Dev Toolbar showing No accessibility or performance issues detected"
+        },
+        {
+          "_type": "block",
+          "_key": "k4u",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4t",
+              "text": "What's next",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4w",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4v",
+              "text": "Of course, this website will probably always be a work in progress as I continue my journey as a software developer. I plan to make improvements as I go and maybe write blog posts about the different changes I make.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k4y",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4x",
+              "text": "I also have some web development projects that I want to pick back up and improve.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k50",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k4z",
+              "text": "Thanks for reading!",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ]
+    },
+    {
+      "slug": "contributing-to-chatcraft",
+      "title": "Contributing to Chatcraft",
+      "pubDate": "2024-06-30T12:00:00.000Z",
+      "description": "A look at some of my recent contributions to the Chatcraft.org project.",
+      "author": "Francesco Menghi",
+      "tags": [
+        {
+          "slug": "css",
+          "label": "CSS"
+        },
+        {
+          "slug": "open-source",
+          "label": "Open Source"
+        },
+        {
+          "slug": "react",
+          "label": "React"
+        },
+        {
+          "slug": "ai",
+          "label": "AI"
+        }
+      ],
+      "content": [
+        {
+          "_type": "block",
+          "_key": "k4",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0",
+              "text": "Earlier this year I discovered ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k2",
+              "text": "Chatcraft.org",
+              "marks": [
+                "k1"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k3",
+              "text": ", an AI chat app built with React specifically designed for developers to work with code, experiment, and learn using large language models (LLM). Chatcraft supports basic free LLMs but also lets you add an API key to use more advanced models like GPT-4o from OpenAI.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k1",
+              "href": "https://chatcraft.org"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k6",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k5",
+              "text": "In this blog post I talk about:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k8",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k7",
+              "text": "My fist few enhancements to Chatcraft",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "ka",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k9",
+              "text": "Various UI fixes",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "kc",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "kb",
+              "text": "Improvements to the mobile Chatcraft experience",
+              "marks": []
+            }
+          ],
+          "markDefs": [],
+          "listItem": "bullet",
+          "level": 1
+        },
+        {
+          "_type": "block",
+          "_key": "kk",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "kd",
+              "text": "To learn more about Chatcraft you can read some great blog posts from ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "kf",
+              "text": "David Humphrey",
+              "marks": [
+                "ke"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "kg",
+              "text": " and ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "ki",
+              "text": "Taras Glek",
+              "marks": [
+                "kh"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "kj",
+              "text": ".",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "ke",
+              "href": "https://blog.humphd.org/chatcraft-org/"
+            },
+            {
+              "_type": "link",
+              "_key": "kh",
+              "href": "https://taras.glek.net/post/chatcraft.org-opensourcechatgpt-for-devs/"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "km",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "kl",
+              "text": "Initial contributions",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "ku",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "kn",
+              "text": "My first contribution to Chatcraft was a ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "kp",
+              "text": "one line fix",
+              "marks": [
+                "ko"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "kq",
+              "text": " of a bug I found while using the app in Safari. I then picked up an ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "ks",
+              "text": "issue",
+              "marks": [
+                "kr"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "kt",
+              "text": " about reworking the settings panel. I created a side panel with different categories on the left and the content on the right. This is what it currently looks like:",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "ko",
+              "href": "https://github.com/tarasglek/chatcraft.org/pull/571"
+            },
+            {
+              "_type": "link",
+              "_key": "kr",
+              "href": "https://github.com/tarasglek/chatcraft.org/issues/578"
+            }
+          ]
+        },
+        {
+          "_type": "image",
+          "_key": "kv",
+          "asset": {
+            "_ref": "static-Chatcraft-settings.png",
+            "url": "/images/posts/Chatcraft-settings.png"
+          },
+          "alt": "User Settings for Chatcraft.org"
+        },
+        {
+          "_type": "block",
+          "_key": "k13",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "kw",
+              "text": "While working on this ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "ky",
+              "text": "pull request",
+              "marks": [
+                "kx"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "kz",
+              "text": ", I familiarized myself with ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k11",
+              "text": "Chakra UI",
+              "marks": [
+                "k10"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k12",
+              "text": ", a React library full of great looking and accessible components to use and modify as needed.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "kx",
+              "href": "https://github.com/tarasglek/chatcraft.org/pull/592"
+            },
+            {
+              "_type": "link",
+              "_key": "k10",
+              "href": "https://chakra-ui.com"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k15",
+          "style": "h2",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k14",
+              "text": "Recent changes",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k1d",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k16",
+              "text": "In the last few weeks, two of my pull request were accepted and merged in. The ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k18",
+              "text": "first",
+              "marks": [
+                "k17"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k19",
+              "text": " was a series of layout changes for better visual consistency throughout the app and the ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k1b",
+              "text": "second",
+              "marks": [
+                "k1a"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k1c",
+              "text": " was focused on a better mobile experience.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k17",
+              "href": "https://github.com/tarasglek/chatcraft.org/pull/653"
+            },
+            {
+              "_type": "link",
+              "_key": "k1a",
+              "href": "https://github.com/tarasglek/chatcraft.org/pull/654"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k1f",
+          "style": "h3",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1e",
+              "text": "Polishing the UI",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k1h",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1g",
+              "text": "One day I was tweaking the Chatcraft UI starting with some padding and margin changes. It then led me to making more small fixes that, when put together, amounted to a substantial visual change.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k1m",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1i",
+              "text": "I moved the search icon button inside of the search bar by using ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k1k",
+              "text": "InputRightElement",
+              "marks": [
+                "k1j"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k1l",
+              "text": " from Chakra UI. I made some improvements to the “starred prompt” list and it’s related icons and I changed the side bar to open to “saved chats” by defaults.",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k1j",
+              "href": "https://v2.chakra-ui.com/docs/components/input/usage#add-elements-inside-input"
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k1o",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1n",
+              "text": "I also modified how the date is displayed in the side bar by adding “Today” and “Yesterday” options.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "code",
+          "_key": "k1p",
+          "code": "const formattedDate = new Intl.DateTimeFormat(undefined, {\n  year: \"numeric\",\n  month: \"short\",\n  day: \"numeric\",\n}).format(chat.date);\n\nconst todayDate = new Date();\n\nconst currentMonth =\n  todayDate.getFullYear() === chat.date.getFullYear() &&\n  todayDate.getMonth() === chat.date.getMonth();\n\nconst isToday = currentMonth && todayDate.getDate() === chat.date.getDate();\nconst isYesterday =\n  currentMonth && todayDate.getDate() - 1 === chat.date.getDate();",
+          "language": "js"
+        },
+        {
+          "_type": "block",
+          "_key": "k1u",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1q",
+              "text": "I used ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k1s",
+              "text": "ternary",
+              "marks": [
+                "k1r"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k1t",
+              "text": " operators to handle the logic in the react component like this:",
+              "marks": []
+            }
+          ],
+          "markDefs": [
+            {
+              "_type": "link",
+              "_key": "k1r",
+              "href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator"
+            }
+          ]
+        },
+        {
+          "_type": "code",
+          "_key": "k1v",
+          "code": "  <Text flex={1} fontSize=\"sm\" as=\"strong\">\n-   {formatDate(chat.date, true)}\n+   {isToday ? \"Today\" : isYesterday ? \"Yesterday\" : formattedDate}\n  </Text>",
+          "language": "diff"
+        },
+        {
+          "_type": "block",
+          "_key": "k1x",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1w",
+              "text": "Here is how the interface looks like now:",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "image",
+          "_key": "k1y",
+          "asset": {
+            "_ref": "static-Chatcraft-desktop.png",
+            "url": "/images/posts/Chatcraft-desktop.png"
+          },
+          "alt": "Chatcraft.org main interface"
+        },
+        {
+          "_type": "block",
+          "_key": "k20",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k1z",
+              "text": "Overall, I feel like every element of the UI has more breathing room without losing important space for the main chat. The header, including the main title and search bar, are also more prominent.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k22",
+          "style": "h3",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k21",
+              "text": "Focus on mobile",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k24",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k23",
+              "text": "When we work on a project that is designed for desktop first, it is very hard to make various buttons fit into tiny screens of mobile devices without compromising usability.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k26",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k25",
+              "text": "As more features were added over time, more buttons started showing around the main text box area. For example, when using OpenAI models, there’s a microphone button to record text instead of typing into the prompt and there’s a “text-to-speech” to hear the AI response out loud.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k28",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k27",
+              "text": "After making every button the same size, I decided to move the “text-to-Speech” button inside of the right menu button (the up arrow next to the Send button) to make space for the text area. I also made a change to hide the microphone button as soon as the user starts typing. This subtle change creates a lot more space for the text area to see what is being typed on.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "image",
+          "_key": "k29",
+          "asset": {
+            "_ref": "static-Chatcraft-mobile.webp",
+            "url": "/images/posts/Chatcraft-mobile.webp"
+          },
+          "alt": "before and after look at the Chatcraft.org mobile interface"
+        },
+        {
+          "_type": "block",
+          "_key": "k2b",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2a",
+              "text": "I wasn’t sure how the Chatcraft maintainers would react after receiving a pull request that modifies the look of the app (with quite a few opinionated changes). After all, I am not a designer and what looks good to me might not look good to someone else.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k2d",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2c",
+              "text": "Both David and Taras have been very supportive and encouraging of my work and I’ve had great interactions with everyone involved in the project.",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        },
+        {
+          "_type": "block",
+          "_key": "k2f",
+          "style": "normal",
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k2e",
+              "text": "Chatcraft is a fantastic Open Source project for anyone looking to work on a React app!",
+              "marks": []
+            }
+          ],
+          "markDefs": []
+        }
+      ]
+    }
+  ]
+}

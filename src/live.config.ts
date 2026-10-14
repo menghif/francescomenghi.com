@@ -1,6 +1,11 @@
 import { defineLiveCollection } from "astro:content";
-import { emdashLoader } from "emdash/runtime";
 
-export const collections = {
-  _emdash: defineLiveCollection({ loader: emdashLoader() }),
-};
+// The CMS loader is only needed while running the local dev server. Static
+// builds read src/data/content.json instead (see src/lib/posts.ts).
+export const collections = import.meta.env.DEV
+  ? {
+      _emdash: defineLiveCollection({
+        loader: (await import("emdash/runtime")).emdashLoader(),
+      }),
+    }
+  : {};

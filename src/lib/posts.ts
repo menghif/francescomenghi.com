@@ -1,10 +1,5 @@
-import {
-  getAllTermsForEntries,
-  getEmDashCollection,
-  getEmDashEntry,
-  getEntryTerms,
-  type PortableTextBlock,
-} from "emdash";
+import type { PortableTextBlock } from "emdash";
+import snapshot from "../data/content.json";
 
 export interface Tag {
   slug: string;
@@ -54,8 +49,23 @@ function toPost(data: PostData, tags: Tag[]): Post {
 const toTags = (terms: { slug: string; label: string }[] = []): Tag[] =>
   terms.map(({ slug, label }) => ({ slug, label }));
 
-/** All published posts, newest first. */
-export async function getPosts(): Promise<Post[]> {
+interface SnapshotPost extends Omit<Post, "pubDate" | "content"> {
+  pubDate: string;
+  content: unknown[];
+}
+
+// Static builds read the snapshot written by `pnpm content:export`.
+function snapshotPosts(): Post[] {
+  return (snapshot.posts as unknown as SnapshotPost[]).map((post) => ({
+    ...post,
+    pubDate: new Date(post.pubDate),
+    content: post.content as PortableTextBlock[],
+  }));
+}
+
+// The dev server reads live from the local CMS so edits show up immediately.
+async function cmsPosts(): Promise<Post[]> {
+  const { getAllTermsForEntries, getEmDashCollection } = await import("emdash");
   const { entries, error } = await getEmDashCollection("posts", {
     status: "published",
   });
@@ -66,23 +76,22 @@ export async function getPosts(): Promise<Post[]> {
     entries.map((entry) => entry.id),
   );
 
-  return entries
-    .map((entry) =>
-      toPost(
-        entry.data as unknown as PostData,
-        toTags(termsById.get(entry.id)?.tag),
-      ),
-    )
-    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+  return entries.map((entry) =>
+    toPost(
+      entry.data as unknown as PostData,
+      toTags(termsById.get(entry.id)?.tag),
+    ),
+  );
+}
+
+/** All published posts, newest first. */
+export async function getPosts(): Promise<Post[]> {
+  const posts = import.meta.env.DEV ? await cmsPosts() : snapshotPosts();
+  return posts.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 }
 
 export async function getPost(slug: string): Promise<Post | undefined> {
-  const { entry } = await getEmDashEntry("posts", slug);
-  if (!entry || entry.data.status !== "published") return undefined;
-  return toPost(
-    entry.data as unknown as PostData,
-    toTags(await getEntryTerms("posts", entry.id, "tag")),
-  );
+  return (await getPosts()).find((post) => post.slug === slug);
 }
 
 /** Every tag in use, sorted by label. */

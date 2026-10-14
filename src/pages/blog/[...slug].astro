@@ -1,20 +1,68 @@
 ---
-import { PortableText } from "emdash/ui";
 import PostCode from "../../components/PostCode.astro";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
-import { getPost } from "../../lib/posts";
+import { getPost, getPosts, type Post } from "../../lib/posts";
+import { portableTextToHtml } from "../../lib/portable-text-html";
 
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post?: Post;
+}
+
+// Static builds get the post from getStaticPaths; the on-demand dev server
+// looks it up from the CMS by slug.
 const { slug } = Astro.params;
-const post = slug ? await getPost(slug) : undefined;
+const post = Astro.props.post ?? (slug ? await getPost(slug) : undefined);
 
 if (!post) {
   return Astro.rewrite("/404");
 }
+
+// Code blocks go through Expressive Code; everything else is plain HTML.
+type Segment =
+  | { kind: "html"; html: string }
+  | {
+      kind: "code";
+      node: { code: string; language?: string; filename?: string };
+    };
+
+const segments: Segment[] = [];
+let run: typeof post.content = [];
+const flush = () => {
+  if (run.length) {
+    segments.push({ kind: "html", html: portableTextToHtml(run, (p) => p) });
+    run = [];
+  }
+};
+for (const block of post.content) {
+  if (block._type === "code") {
+    flush();
+    segments.push({
+      kind: "code",
+      node: block as unknown as Extract<Segment, { kind: "code" }>["node"],
+    });
+  } else {
+    run.push(block);
+  }
+}
+flush();
 ---
 
 <MarkdownPostLayout frontmatter={post}>
-  <PortableText
-    value={post.content}
-    components={{ type: { code: PostCode } }}
-  />
+  {
+    segments.map((segment) =>
+      segment.kind === "code" ? (
+        <PostCode node={segment.node} />
+      ) : (
+        <Fragment set:html={segment.html} />
+      ),
+    )
+  }
 </MarkdownPostLayout>

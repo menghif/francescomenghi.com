@@ -4,6 +4,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import TagIcon from "../../components/icons/TagIcon.astro";
 import { getPosts, uniqueTags } from "../../lib/posts";
 
+export async function getStaticPaths() {
+  const tags = uniqueTags(await getPosts());
+  return tags.map((tag) => ({ params: { tag: tag.slug } }));
+}
+
 const { tag: tagSlug } = Astro.params;
 const allPosts = await getPosts();
 const tag = uniqueTags(allPosts).find((t) => t.slug === tagSlug);

@@ -16,5 +16,11 @@ export default [
       },
     },
   },
+  {
+    files: ["astro.config.mjs", "scripts/**"],
+    languageOptions: {
+      globals: { process: "readonly", console: "readonly", URL: "readonly" },
+    },
+  },
   { ignores: ["dist/**", ".astro/**"] },
 ];
